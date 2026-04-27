@@ -24,7 +24,7 @@ functions:
   - asa-channel-servers-defined
   - asa-binding-version
   - asa-message-schemas-in-components
-
+extends: ["spectral:asyncapi"]
 rules:
   # ===========================================================================
   # SECURITY RULES
@@ -37,25 +37,9 @@ rules:
   # ---------------------------------------------------------------------------
   asa:AAR001:
     description: "HTTPS protocol is mandatory."
-    message: "AAR001: Server '{{property}}' must use 'https' (or 'wss') as protocol. Found '{{value}}'."
+    message: "AAR001: Server must use a secure protocol (https, wss, amqps, etc). Found '{{value}}'."
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar001"
     severity: error
-    formats:
-      - asyncapi2
-    given: "$.servers[*]"
-    then:
-      field: "protocol"
-      function: pattern
-      functionOptions:
-        match: "^(https|wss|amqps|kafka-secure|secure-mqtt)$"
-
-  asa:AAR001-v3:
-    description: "HTTPS protocol is mandatory (AsyncAPI 3.x)."
-    message: "AAR001: Server must use a secure protocol. Found '{{value}}'."
-    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar001"
-    severity: error
-    formats:
-      - asyncapi3
     given: "$.servers[*]"
     then:
       field: "protocol"
@@ -85,37 +69,9 @@ rules:
   # ---------------------------------------------------------------------------
   asa:AAR018:
     description: "The security scheme must be among those allowed by the organization and must be complete."
-    message: "AAR018: {{error}}"
+    message: "AAR018: The security scheme must be among those allowed by the organization and must be complete"
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar018"
     severity: warn
-    formats:
-      - asyncapi2
-    given: "$.components.securitySchemes[*]"
-    then:
-      function: asa-check-security-schemes
-      functionOptions:
-        allowedTypes:
-          - userPassword
-          - apiKey
-          - X509
-          - symmetricEncryption
-          - asymmetricEncryption
-          - httpApiKey
-          - http
-          - oauth2
-          - openIdConnect
-          - scramSha256
-          - scramSha512
-          - gssapi
-          - plain
-
-  asa:AAR018-v3:
-    description: "The security scheme must be among those allowed by the organization and must be complete (AsyncAPI 3.x)."
-    message: "AAR018: {{error}}"
-    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar018"
-    severity: warn
-    formats:
-      - asyncapi3
     given: "$.components.securitySchemes[*]"
     then:
       function: asa-check-security-schemes
@@ -145,8 +101,6 @@ rules:
     message: "AAR043: Channel '{{property}}' should define a security scheme in its operations or bindings."
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar043"
     severity: warn
-    formats:
-      - asyncapi2
     given: "$.channels[*][publish,subscribe]"
     then:
       field: "security"
@@ -166,21 +120,9 @@ rules:
     message: "AAR009: Operation must declare at least one tag."
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar009"
     severity: error
-    formats:
-      - asyncapi2
-    given: "$.channels[*][publish,subscribe]"
-    then:
-      field: "tags"
-      function: truthy
-
-  asa:AAR009-v3:
-    description: "Each operation should have at least one tag (AsyncAPI 3.x)."
-    message: "AAR009: Operation must declare at least one tag."
-    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar009"
-    severity: error
-    formats:
-      - asyncapi3
-    given: "$.operations[*]"
+    given:
+      - "$.channels[*][publish,subscribe]"
+      - "$.operations[*]"
     then:
       field: "tags"
       function: truthy
@@ -197,19 +139,6 @@ rules:
     severity: warn
     given:
       - "$.channels[*][publish,subscribe].tags[*]"
-      - "$.tags[*]"
-    then:
-      field: "description"
-      function: truthy
-
-  asa:AAR010-v3:
-    description: "Tags should be documented with a description (AsyncAPI 3.x)."
-    message: "AAR010: Tag '{{value}}' should have a 'description' field."
-    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar010"
-    severity: warn
-    formats:
-      - asyncapi3
-    given:
       - "$.operations[*].tags[*]"
       - "$.tags[*]"
     then:
@@ -226,8 +155,6 @@ rules:
     message: "AAR040: {{error}}"
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar040"
     severity: warn
-    formats:
-      - asyncapi2
     given: "$"
     then:
       function: asa-channel-servers-defined
@@ -242,8 +169,6 @@ rules:
     message: "AAR041: Consider defining reusable server and channel references in 'components'."
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar041"
     severity: info
-    formats:
-      - asyncapi2
     given: "$.components"
     then:
       - field: "servers"
@@ -280,21 +205,9 @@ rules:
     message: "AAR012: Operation must declare an 'operationId'."
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar012"
     severity: warn
-    formats:
-      - asyncapi2
-    given: "$.channels[*][publish,subscribe]"
-    then:
-      field: "operationId"
-      function: truthy
-
-  asa:AAR012-v3:
-    description: "Each operation should have a unique operationId (AsyncAPI 3.x)."
-    message: "AAR012: Operation must declare an 'operationId' or a unique key."
-    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar012"
-    severity: warn
-    formats:
-      - asyncapi3
-    given: "$.operations[*]"
+    given:
+      - "$.channels[*][publish,subscribe]"
+      - "$.operations[*]"
     then:
       field: "operationId"
       function: truthy
@@ -309,8 +222,6 @@ rules:
     message: "AAR013: {{error}}"
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar013"
     severity: error
-    formats:
-      - asyncapi2
     given: "$"
     then:
       function: asa-duplicate-operation-id
@@ -335,35 +246,21 @@ rules:
   # Contact should contain name, url, and email fields.
   # Severity: warn (MAJOR / BUG)
   # ---------------------------------------------------------------------------
-  asa:AAR016-name:
-    description: "Contact must contain 'name' field."
-    message: "AAR016: The 'contact' object must include a 'name' field."
+  asa:AAR016:
+    description: "Contact object must be complete (name, url, email)."
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar016"
     severity: warn
     given: "$.info.contact"
     then:
-      field: "name"
-      function: truthy
-
-  asa:AAR016-url:
-    description: "Contact must contain 'url' field."
-    message: "AAR016: The 'contact' object must include a 'url' field."
-    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar016"
-    severity: warn
-    given: "$.info.contact"
-    then:
-      field: "url"
-      function: truthy
-
-  asa:AAR016-email:
-    description: "Contact must contain 'email' field."
-    message: "AAR016: The 'contact' object must include an 'email' field."
-    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar016"
-    severity: warn
-    given: "$.info.contact"
-    then:
-      field: "email"
-      function: truthy
+      - field: "name"
+        function: truthy
+        message: "AAR016: The 'contact' object must include a 'name' field."
+      - field: "url"
+        function: truthy
+        message: "AAR016: The 'contact' object must include a 'url' field."
+      - field: "email"
+        function: truthy
+        message: "AAR016: The 'contact' object must include an 'email' field."
 
   # ---------------------------------------------------------------------------
   # AAR017 - UndefinedUrlLicense
@@ -405,21 +302,9 @@ rules:
     message: "AAR021: Operation must have a 'summary' field."
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar021"
     severity: warn
-    formats:
-      - asyncapi2
-    given: "$.channels[*][publish,subscribe]"
-    then:
-      field: "summary"
-      function: truthy
-
-  asa:AAR021-v3:
-    description: "Provide a summary for each operation (AsyncAPI 3.x)."
-    message: "AAR021: Operation must have a 'summary' field."
-    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar021"
-    severity: warn
-    formats:
-      - asyncapi3
-    given: "$.operations[*]"
+    given:
+      - "$.channels[*][publish,subscribe]"
+      - "$.operations[*]"
     then:
       field: "summary"
       function: truthy
@@ -434,8 +319,6 @@ rules:
     message: "AAR022: The 'description' field must not be identical to the 'summary' field."
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar022"
     severity: warn
-    formats:
-      - asyncapi2
     given: "$.channels[*][publish,subscribe]"
     then:
       function: schema
@@ -459,8 +342,6 @@ rules:
     message: "AAR024: {{error}}"
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar024"
     severity: warn
-    formats:
-      - asyncapi2
     given: "$.channels[*][publish,subscribe].message"
     then:
       function: asa-message-examples-validation
@@ -475,8 +356,6 @@ rules:
     message: "AAR026: {{error}}"
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar026"
     severity: info
-    formats:
-      - asyncapi2
     given: "$.channels[*][publish,subscribe].message"
     then:
       function: asa-message-schemas-in-components
@@ -486,50 +365,15 @@ rules:
   # Each channel and each operation must have a description.
   # Severity: warn (MAJOR / BUG)
   # ---------------------------------------------------------------------------
-  asa:AAR029-channel:
-    description: "Each channel must have a description."
-    message: "AAR029: Channel must have a 'description' field that explains its purpose."
+  asa:AAR029:
+    description: "Each channel and operation must have a description."
+    message: "AAR029: This element must have a 'description' field that explains its purpose."
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar029"
     severity: warn
-    formats:
-      - asyncapi2
-    given: "$.channels[*]"
-    then:
-      field: "description"
-      function: truthy
-
-  asa:AAR029-operation:
-    description: "Each operation must have a description."
-    message: "AAR029: Operation must have a 'description' field that explains its purpose."
-    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar029"
-    severity: warn
-    formats:
-      - asyncapi2
-    given: "$.channels[*][publish,subscribe]"
-    then:
-      field: "description"
-      function: truthy
-
-  asa:AAR029-v3-channel:
-    description: "Each channel must have a description (AsyncAPI 3.x)."
-    message: "AAR029: Channel must have a 'description' field that explains its purpose."
-    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar029"
-    severity: warn
-    formats:
-      - asyncapi3
-    given: "$.channels[*]"
-    then:
-      field: "description"
-      function: truthy
-
-  asa:AAR029-v3-operation:
-    description: "Each operation must have a description (AsyncAPI 3.x)."
-    message: "AAR029: Operation must have a 'description' field that explains its purpose."
-    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar029"
-    severity: warn
-    formats:
-      - asyncapi3
-    given: "$.operations[*]"
+    given:
+      - "$.channels[*]"
+      - "$.channels[*][publish,subscribe]"
+      - "$.operations[*]"
     then:
       field: "description"
       function: truthy
@@ -544,8 +388,6 @@ rules:
     message: "AAR031: {{error}}"
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar031"
     severity: warn
-    formats:
-      - asyncapi2
     given: "$.components.messages[*]"
     then:
       function: asa-message-examples-validation
@@ -613,19 +455,7 @@ rules:
     given:
       - "$.components.messages[*]"
       - "$.channels[*][publish,subscribe].message"
-    then:
-      field: "title"
-      function: truthy
-
-  asa:AAR035-v3:
-    description: "It is recommended to have a title per message (AsyncAPI 3.x)."
-    message: "AAR035: Message should have a 'title' field."
-    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar035"
-    severity: info
-    formats:
-      - asyncapi3
-    given:
-      - "$.components.messages[*]"
+      - "$.operations[*].messages[*]"
     then:
       field: "title"
       function: truthy
@@ -678,8 +508,6 @@ rules:
     message: "AAR042: Message should have a 'messageId' field for unique identification."
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar042"
     severity: info
-    formats:
-      - asyncapi2
     given:
       - "$.components.messages[*]"
       - "$.channels[*][publish,subscribe].message"
