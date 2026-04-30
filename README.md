@@ -1,6 +1,6 @@
 # APIAddicts AsyncAPI Style Guide - Spectral Ruleset
 
-[![Node.js CI](https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral/actions/workflows/node.js.yml/badge.svg)](https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral/actions/workflows/node.js.yml)
+[![Node.js CI](https://github.com/apiaddicts/apquality-spectral/actions/workflows/node.js.yml/badge.svg)](https://github.com/apiaddicts/apquality-spectral/actions/workflows/node.js.yml) ![Coverage](./coverage/badges.svg)
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](LICENSE)
 
 Spectral rules for **AsyncAPI 2.x and 3.x** definitions, managed by [ApiQuality](https://apiquality.io) and provided to the [APIAddicts](https://apiaddicts.org) community.
