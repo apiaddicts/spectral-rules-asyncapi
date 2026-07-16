@@ -102,6 +102,7 @@ spectral lint your-asyncapi.yaml
 | **AAR037** | `warn` | Bindings must specify a `bindingVersion`. |
 | **AAR042** | `info` | Messages should have a unique `messageId` identifier. |
 | **AAR050** | `error` | The `info.title` field must exist and not be empty. |
+| **AAR051** | `error` | Every operation's `operationId` must be present and follow camelCase naming convention. |
 
 ### Schema Rules
 
@@ -124,13 +125,14 @@ All rules support **AsyncAPI 2.x** by default. Rules that differ structurally fo
 
 ## Custom Functions
 
-The ruleset includes 9 custom Spectral functions for complex validation logic:
+The ruleset includes 10 custom Spectral functions for complex validation logic:
 
 | Function | Used by | Purpose |
 |----------|---------|---------|
 | `asa-check-security-schemes` | AAR018 | Validates security scheme types and completeness |
 | `asa-description-format` | AAR036 | Checks description starts uppercase, ends with period |
 | `asa-duplicate-operation-id` | AAR013 | Detects duplicate operationId values across channels |
+| `asa-operation-id-camel-case` | AAR051 | Checks operationId is present and follows camelCase |
 | `asa-message-examples-validation` | AAR024, AAR031 | Validates message examples against schemas |
 | `asa-numeric-parameter-integrity` | AAR032 | Checks numeric properties have constraints |
 | `asa-string-parameter-integrity` | AAR033 | Checks string properties have constraints |
@@ -218,6 +220,7 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR042 | `asa:AAR042` | BUG | MAJOR |
 | AAR043 | `asa:AAR043` | VULNERABILITY | MAJOR |
 | AAR050 | `asa:AAR050` | BUG | MAJOR |
+| AAR051 | `asa:AAR051` | BUG | MAJOR |
 
 ---
 
