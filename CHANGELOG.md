@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [1.1.0-beta-1] - 2026-07-15
+
+### Added
+
+- AAR038 - InfoTitleRequired: The `info.title` field must exist and not be empty.
+
 ## [1.0.0] - 2025-12-29
 
 ### Added

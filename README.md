@@ -100,6 +100,7 @@ spectral lint your-asyncapi.yaml
 | **AAR035** | `info` | Messages should have a `title` field. |
 | **AAR036** | `warn` | Descriptions must begin with a capital letter and end with a period. |
 | **AAR037** | `warn` | Bindings must specify a `bindingVersion`. |
+| **AAR038** | `error` | The `info.title` field must exist and not be empty. |
 | **AAR042** | `info` | Messages should have a unique `messageId` identifier. |
 
 ### Schema Rules
@@ -212,6 +213,7 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR035 | `asa:AAR035` | BUG | MAJOR |
 | AAR036 | `asa:AAR036` | BUG | MAJOR |
 | AAR037 | `asa:AAR037` | BUG | MAJOR |
+| AAR038 | `asa:AAR038` | BUG | MAJOR |
 | AAR040 | `asa:AAR040` | BUG | MAJOR |
 | AAR041 | `asa:AAR041` | BUG | MAJOR |
 | AAR042 | `asa:AAR042` | BUG | MAJOR |
