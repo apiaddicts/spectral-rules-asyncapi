@@ -498,16 +498,6 @@ rules:
     then:
       function: asa-binding-version
 
-  asa:AAR038:
-    description: "The info.title field must exist and not be empty."
-    message: "AAR038: The 'info' object must contain a non-empty 'title' field."
-    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar038"
-    severity: error
-    given: "$.info"
-    then:
-      field: "title"
-      function: truthy
-
   # ---------------------------------------------------------------------------
   # AAR042 - MessageIdentifier
   # It is recommended to have a unique identifier per message.
@@ -523,4 +513,19 @@ rules:
       - "$.channels[*][publish,subscribe].message"
     then:
       field: "messageId"
+      function: truthy
+
+  # ---------------------------------------------------------------------------
+  # AAR050 - InfoTitleRequired
+  # The info.title field must exist and not be empty.
+  # Severity: error (MAJOR / BUG)
+  # ---------------------------------------------------------------------------
+  asa:AAR050:
+    description: "The info.title field must exist and not be empty."
+    message: "AAR050: The 'info' object must contain a non-empty 'title' field."
+    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar050"
+    severity: error
+    given: "$.info"
+    then:
+      field: "title"
       function: truthy

@@ -1,18 +1,18 @@
 const { linterForRule } = require("../../helpers/utils");
-const failExample = require("./AAR038/fail-example");
-const okExample = require("./AAR038/ok-example");
+const failExample = require("./AAR050/fail-example");
+const okExample = require("./AAR050/ok-example");
 
-describe("AAR038: Info title is required", () => {
+describe("AAR050: Info title is required", () => {
   let linter;
 
   beforeAll(async () => {
-    linter = await linterForRule("asa:AAR038");
+    linter = await linterForRule("asa:AAR050");
   });
 
   test("Should fail when info.title is empty", async () => {
     const results = await linter.run(failExample);
     expect(results.length).toBeGreaterThan(0);
-    expect(results[0].code).toBe("asa:AAR038");
+    expect(results[0].code).toBe("asa:AAR050");
   });
 
   test("Should pass when info.title is present and non-empty", async () => {
