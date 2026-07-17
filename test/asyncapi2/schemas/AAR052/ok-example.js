@@ -5,9 +5,25 @@ module.exports = {
     "title": "Orders Service"
   },
   "channels": {
-    "orders": {
+    "ordersApp": {
       "subscribe": {
-        "operationId": "receiveOrder",
+        "operationId": "receiveOrderApp",
+        "message": {
+          "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
+          "payload": {
+            "type": "record",
+            "name": "OrderValue",
+            "namespace": "org.madrid.p001.core.orders",
+            "fields": [
+              { "name": "id", "type": "string" }
+            ]
+          }
+        }
+      }
+    },
+    "ordersCommon": {
+      "subscribe": {
+        "operationId": "receiveOrderCommon",
         "message": {
           "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
           "payload": {
