@@ -111,6 +111,7 @@ spectral lint your-asyncapi.yaml
 | **AAR024** | `warn` | Messages must comply with the payload schema (examples validated). |
 | **AAR026** | `info` | Message schemas should be defined in `components.messages` and referenced via `$ref`. |
 | **AAR031** | `warn` | Message examples must follow the declared payload and headers schemas. |
+| **AAR052** | `error` | The namespace of an Avro schema must follow the corporate pattern. |
 
 ---
 
@@ -125,7 +126,7 @@ All rules support **AsyncAPI 2.x** by default. Rules that differ structurally fo
 
 ## Custom Functions
 
-The ruleset includes 10 custom Spectral functions for complex validation logic:
+The ruleset includes 11 custom Spectral functions for complex validation logic:
 
 | Function | Used by | Purpose |
 |----------|---------|---------|
@@ -139,6 +140,7 @@ The ruleset includes 10 custom Spectral functions for complex validation logic:
 | `asa-channel-servers-defined` | AAR040 | Validates channel server references exist |
 | `asa-binding-version` | AAR037 | Checks bindings have bindingVersion |
 | `asa-message-schemas-in-components` | AAR026 | Recommends $ref usage for message schemas |
+| `asa-avro-namespace-pattern` | AAR052 | Validates Avro namespace against the corporate pattern |
 
 ---
 
@@ -148,6 +150,7 @@ The ruleset includes 10 custom Spectral functions for complex validation logic:
 apiaddicts-asyncapi-style-guide-spectral/
 ├── .github/workflows/       # CI/CD configuration
 ├── functions/               # Custom Spectral rule functions
+│   ├── asa-avro-namespace-pattern.js
 │   ├── asa-binding-version.js
 │   ├── asa-channel-servers-defined.js
 │   ├── asa-check-security-schemes.js
@@ -221,6 +224,7 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR043 | `asa:AAR043` | VULNERABILITY | MAJOR |
 | AAR050 | `asa:AAR050` | BUG | MAJOR |
 | AAR051 | `asa:AAR051` | BUG | MAJOR |
+| AAR052 | `asa:AAR052` | BUG | MAJOR |
 
 ---
 
