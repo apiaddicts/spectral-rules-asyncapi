@@ -19,11 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-## [1.1.0-beta-1] - 2026-07-15
+## [1.1.0-beta-1] - 2026-07-17
 
 ### Added
 
 - AAR050 - InfoTitleRequired: The `info.title` field must exist and not be empty.
+- AAR053 - ChannelNamingConvention: Validates that the channel/topic name follows the corporate Kafka-topic naming pattern (`<cod_poaps>.<classification>.<domain>.<origin>.<scope>[.<version>]`).
 
 ## [1.0.0] - 2025-12-29
 
