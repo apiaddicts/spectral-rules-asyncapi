@@ -79,6 +79,7 @@ spectral lint your-asyncapi.yaml
 | **AAR010** | `warn` | All tags should have a `description` field. |
 | **AAR040** | `warn` | Channel servers must reference servers defined in the root `servers` object. |
 | **AAR041** | `info` | Servers and channels should be defined in `components` for reusability. |
+| **AAR054** | `error` | Channel/topic classification (2nd segment) must be `cdc`, `cmd` or `sys`. |
 
 ### Format / Documentation Rules
 
@@ -137,6 +138,7 @@ The ruleset includes 9 custom Spectral functions for complex validation logic:
 | `asa-channel-servers-defined` | AAR040 | Validates channel server references exist |
 | `asa-binding-version` | AAR037 | Checks bindings have bindingVersion |
 | `asa-message-schemas-in-components` | AAR026 | Recommends $ref usage for message schemas |
+| `asa-classification-valid-values` | AAR054 | Validates that the channel/topic classification segment is cdc, cmd or sys |
 
 ---
 
@@ -218,6 +220,7 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR042 | `asa:AAR042` | BUG | MAJOR |
 | AAR043 | `asa:AAR043` | VULNERABILITY | MAJOR |
 | AAR050 | `asa:AAR050` | BUG | MAJOR |
+| AAR054 | `asa:AAR054` | BUG | MAJOR |
 
 ---
 
