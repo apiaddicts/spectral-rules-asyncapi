@@ -24,6 +24,7 @@ functions:
   - asa-channel-servers-defined
   - asa-binding-version
   - asa-message-schemas-in-components
+  - asa-x-payload-references-well-formed
 extends: ["spectral:asyncapi"]
 rules:
   # ===========================================================================
@@ -529,3 +530,12 @@ rules:
     then:
       field: "title"
       function: truthy
+
+  asa:AAR055:
+    description: "When the x-payload-references extension exists, each item must contain three required, non-empty fields: 'subject' (schema name in the registry), 'ref' (SVN URL of the .avsc file) and 'referenceName' (fully qualified Avro type name, e.g. org.madrid.core.payload.alumnos.Ciudadano)."
+    message: "AAR055: {{error}}"
+    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar055"
+    severity: warn
+    given: "$..x-payload-references"
+    then:
+      function: asa-x-payload-references-well-formed

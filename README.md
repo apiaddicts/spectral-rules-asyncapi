@@ -110,6 +110,7 @@ spectral lint your-asyncapi.yaml
 | **AAR024** | `warn` | Messages must comply with the payload schema (examples validated). |
 | **AAR026** | `info` | Message schemas should be defined in `components.messages` and referenced via `$ref`. |
 | **AAR031** | `warn` | Message examples must follow the declared payload and headers schemas. |
+| **AAR055** | `warn` | The `x-payload-references` extension, wherever it appears, must have `subject`, `ref` and `referenceName` on every item. |
 
 ---
 
@@ -124,7 +125,7 @@ All rules support **AsyncAPI 2.x** by default. Rules that differ structurally fo
 
 ## Custom Functions
 
-The ruleset includes 9 custom Spectral functions for complex validation logic:
+The ruleset includes 11 custom Spectral functions for complex validation logic:
 
 | Function | Used by | Purpose |
 |----------|---------|---------|
@@ -137,6 +138,7 @@ The ruleset includes 9 custom Spectral functions for complex validation logic:
 | `asa-channel-servers-defined` | AAR040 | Validates channel server references exist |
 | `asa-binding-version` | AAR037 | Checks bindings have bindingVersion |
 | `asa-message-schemas-in-components` | AAR026 | Recommends $ref usage for message schemas |
+| `asa-x-payload-references-well-formed` | AAR055 | Validates that x-payload-references items each have subject, ref and referenceName |
 
 ---
 
@@ -154,7 +156,9 @@ apiaddicts-asyncapi-style-guide-spectral/
 │   ├── asa-message-examples-validation.js
 │   ├── asa-message-schemas-in-components.js
 │   ├── asa-numeric-parameter-integrity.js
-│   └── asa-string-parameter-integrity.js
+│   ├── asa-string-parameter-integrity.js
+│   ├── asa-classification-valid-values.js
+│   └── asa-x-payload-references-well-formed.js
 ├── test/
 │   ├── helpers/utils.js     # Test utilities
 │   ├── asyncapi2/           # AsyncAPI 2.x tests
@@ -218,6 +222,7 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR042 | `asa:AAR042` | BUG | MAJOR |
 | AAR043 | `asa:AAR043` | VULNERABILITY | MAJOR |
 | AAR050 | `asa:AAR050` | BUG | MAJOR |
+| AAR055 | `asa:AAR055` | BUG | MAJOR |
 
 ---
 

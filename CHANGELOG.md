@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - AAR050 - InfoTitleRequired: The `info.title` field must exist and not be empty.
+- AAR055 - XPayloadReferencesWellFormed: Validates that the `x-payload-references` extension, wherever it appears, contains `subject`, `ref` and `referenceName` on every item.
 
 ## [1.0.0] - 2025-12-29
 
