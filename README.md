@@ -79,6 +79,7 @@ spectral lint your-asyncapi.yaml
 | **AAR010** | `warn` | All tags should have a `description` field. |
 | **AAR040** | `warn` | Channel servers must reference servers defined in the root `servers` object. |
 | **AAR041** | `info` | Servers and channels should be defined in `components` for reusability. |
+| **AAR057** | `error` | At least one channel must be documented as an error topic following `<topicOriginal>.[<consumerGroup>.]error.<n>`. |
 
 ### Format / Documentation Rules
 
@@ -124,7 +125,7 @@ All rules support **AsyncAPI 2.x** by default. Rules that differ structurally fo
 
 ## Custom Functions
 
-The ruleset includes 9 custom Spectral functions for complex validation logic:
+The ruleset includes 11 custom Spectral functions for complex validation logic:
 
 | Function | Used by | Purpose |
 |----------|---------|---------|
@@ -137,6 +138,7 @@ The ruleset includes 9 custom Spectral functions for complex validation logic:
 | `asa-channel-servers-defined` | AAR040 | Validates channel server references exist |
 | `asa-binding-version` | AAR037 | Checks bindings have bindingVersion |
 | `asa-message-schemas-in-components` | AAR026 | Recommends $ref usage for message schemas |
+| `asa-error-topic-documented` | AAR057 | Validates that at least one channel is documented as an error topic |
 
 ---
 
@@ -154,7 +156,7 @@ apiaddicts-asyncapi-style-guide-spectral/
 │   ├── asa-message-examples-validation.js
 │   ├── asa-message-schemas-in-components.js
 │   ├── asa-numeric-parameter-integrity.js
-│   └── asa-string-parameter-integrity.js
+│   └── asa-error-topic-documented.js
 ├── test/
 │   ├── helpers/utils.js     # Test utilities
 │   ├── asyncapi2/           # AsyncAPI 2.x tests
@@ -218,6 +220,7 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR042 | `asa:AAR042` | BUG | MAJOR |
 | AAR043 | `asa:AAR043` | VULNERABILITY | MAJOR |
 | AAR050 | `asa:AAR050` | BUG | MAJOR |
+| AAR057 | `asa:AAR057` | BUG | MAJOR |
 
 ---
 

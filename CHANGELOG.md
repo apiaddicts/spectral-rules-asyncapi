@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [1.1.0-beta-2] - 2026-07-22
+
+### Added
+
+- AAR057 - ErrorTopicDocumented: At least one channel must be documented as an error topic following `<topicOriginal>.[<consumerGroup>.]error.<n>`.
+
 ## [1.1.0-beta-1] - 2026-07-15
 
 ### Added
