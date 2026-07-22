@@ -97,6 +97,25 @@ module.exports = {
           }
         }
       }
+    },
+    "order/cancelled": {
+      "description": "Publish with a non-string (numeric) operationId.",
+      "publish": {
+        "operationId": 12345,
+        "summary": "Publish order cancelled events.",
+        "description": "Publish with operationId set to a number instead of a string.",
+        "security": [{ "bearerAuth": [] }],
+        "tags": [{ "name": "orders", "description": "Order-related operations." }],
+        "message": {
+          "title": "OrderCancelled",
+          "payload": {
+            "type": "object",
+            "properties": {
+              "orderId": { "type": "string", "minLength": 1, "maxLength": 50 }
+            }
+          }
+        }
+      }
     }
   },
   "components": {

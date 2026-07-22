@@ -1,14 +1,14 @@
 module.exports = {
-  "asyncapi": "2.6.0",
+  "asyncapi": "3.0.0",
   "info": {
-    "version": "1.0.0",
-    "title": "Orders Service"
+    "title": "Orders Service",
+    "version": "1.0.0"
   },
   "channels": {
     "ordersApp": {
-      "subscribe": {
-        "operationId": "receiveOrderApp",
-        "message": {
+      "address": "orders/app",
+      "messages": {
+        "OrderValue": {
           "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
           "payload": {
             "type": "record",
@@ -22,9 +22,9 @@ module.exports = {
       }
     },
     "ordersCommon": {
-      "subscribe": {
-        "operationId": "receiveOrderCommon",
-        "message": {
+      "address": "orders/common",
+      "messages": {
+        "OrderValue": {
           "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
           "payload": {
             "type": "record",
@@ -38,9 +38,9 @@ module.exports = {
       }
     },
     "ordersWrapped": {
-      "subscribe": {
-        "operationId": "receiveOrderWrapped",
-        "message": {
+      "address": "orders/wrapped",
+      "messages": {
+        "OrderValue": {
           "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
           "payload": {
             "schema": {
@@ -56,9 +56,9 @@ module.exports = {
       }
     },
     "ordersPlainJsonSchema": {
-      "subscribe": {
-        "operationId": "receiveOrderPlainJsonSchema",
-        "message": {
+      "address": "orders/plain-json-schema",
+      "messages": {
+        "OrderValue": {
           "contentType": "application/json",
           "payload": {
             "type": "object",
@@ -68,6 +68,24 @@ module.exports = {
           }
         }
       }
+    }
+  },
+  "operations": {
+    "receiveOrderApp": {
+      "action": "receive",
+      "channel": { "$ref": "#/channels/ordersApp" }
+    },
+    "receiveOrderCommon": {
+      "action": "receive",
+      "channel": { "$ref": "#/channels/ordersCommon" }
+    },
+    "receiveOrderWrapped": {
+      "action": "receive",
+      "channel": { "$ref": "#/channels/ordersWrapped" }
+    },
+    "receiveOrderPlainJsonSchema": {
+      "action": "receive",
+      "channel": { "$ref": "#/channels/ordersPlainJsonSchema" }
     }
   }
 };

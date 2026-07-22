@@ -1,14 +1,14 @@
 module.exports = {
-  "asyncapi": "2.6.0",
+  "asyncapi": "3.0.0",
   "info": {
-    "version": "1.0.0",
-    "title": "Orders Service"
+    "title": "Orders Service",
+    "version": "1.0.0"
   },
   "channels": {
     "ordersWrongDomain": {
-      "subscribe": {
-        "operationId": "receiveOrderWrongDomain",
-        "message": {
+      "address": "orders/wrong-domain",
+      "messages": {
+        "OrderValue": {
           "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
           "payload": {
             "type": "record",
@@ -22,9 +22,9 @@ module.exports = {
       }
     },
     "ordersEmptyNamespace": {
-      "subscribe": {
-        "operationId": "receiveOrderEmptyNamespace",
-        "message": {
+      "address": "orders/empty-namespace",
+      "messages": {
+        "OrderValue": {
           "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
           "payload": {
             "type": "record",
@@ -38,30 +38,26 @@ module.exports = {
       }
     },
     "ordersViaRef": {
-      "subscribe": {
-        "operationId": "receiveOrderViaRef",
-        "message": {
+      "address": "orders/via-ref",
+      "messages": {
+        "OrderMessage": {
           "$ref": "#/components/messages/OrderMessage"
         }
       }
+    }
+  },
+  "operations": {
+    "receiveOrderWrongDomain": {
+      "action": "receive",
+      "channel": { "$ref": "#/channels/ordersWrongDomain" }
     },
-    "ordersWrapped": {
-      "subscribe": {
-        "operationId": "receiveOrderWrapped",
-        "message": {
-          "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
-          "payload": {
-            "schema": {
-              "type": "record",
-              "name": "OrderValue",
-              "namespace": "org.example.orders",
-              "fields": [
-                { "name": "id", "type": "string" }
-              ]
-            }
-          }
-        }
-      }
+    "receiveOrderEmptyNamespace": {
+      "action": "receive",
+      "channel": { "$ref": "#/channels/ordersEmptyNamespace" }
+    },
+    "receiveOrderViaRef": {
+      "action": "receive",
+      "channel": { "$ref": "#/channels/ordersViaRef" }
     }
   },
   "components": {

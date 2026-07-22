@@ -168,6 +168,8 @@ apiaddicts-asyncapi-style-guide-spectral/
 │   │   ├── format/          # Format/documentation tests
 │   │   └── schemas/         # Schema rule tests
 │   └── asyncapi3/           # AsyncAPI 3.x tests
+│       ├── format/          # Format/documentation tests
+│       └── schemas/         # Schema rule tests
 ├── asa-spectral.yaml        # Main Spectral ruleset
 ├── package.json
 ├── CONTRIBUTING.md
