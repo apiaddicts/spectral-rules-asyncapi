@@ -79,6 +79,7 @@ spectral lint your-asyncapi.yaml
 | **AAR010** | `warn` | All tags should have a `description` field. |
 | **AAR040** | `warn` | Channel servers must reference servers defined in the root `servers` object. |
 | **AAR041** | `info` | Servers and channels should be defined in `components` for reusability. |
+| **AAR058** | `warn` | If a channel name contains `.retry.`, it must follow `<topicOriginal>.<consumerGroup>.retry.<n>`. |
 
 ### Format / Documentation Rules
 
@@ -137,6 +138,7 @@ The ruleset includes 9 custom Spectral functions for complex validation logic:
 | `asa-channel-servers-defined` | AAR040 | Validates channel server references exist |
 | `asa-binding-version` | AAR037 | Checks bindings have bindingVersion |
 | `asa-message-schemas-in-components` | AAR026 | Recommends $ref usage for message schemas |
+| `asa-retry-topic-naming-convention` | AAR058 | Validates that retry channels follow the required retry-topic naming pattern |
 
 ---
 
@@ -154,7 +156,8 @@ apiaddicts-asyncapi-style-guide-spectral/
 │   ├── asa-message-examples-validation.js
 │   ├── asa-message-schemas-in-components.js
 │   ├── asa-numeric-parameter-integrity.js
-│   └── asa-string-parameter-integrity.js
+│   ├── asa-string-parameter-integrity.js
+│   └── asa-retry-topic-naming-convention.js
 ├── test/
 │   ├── helpers/utils.js     # Test utilities
 │   ├── asyncapi2/           # AsyncAPI 2.x tests
@@ -218,6 +221,7 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR042 | `asa:AAR042` | BUG | MAJOR |
 | AAR043 | `asa:AAR043` | VULNERABILITY | MAJOR |
 | AAR050 | `asa:AAR050` | BUG | MAJOR |
+| AAR058 | `asa:AAR058` | BUG | MINOR |
 
 ---
 

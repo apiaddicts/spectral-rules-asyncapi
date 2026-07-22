@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [1.1.0-beta-2] - 2026-07-22
+
+### Added
+
+- AAR058 - RetryTopicNamingConvention: If a channel name contains `.retry.`, it must follow `<topicOriginal>.<consumerGroup>.retry.<n>`.
+
 ## [1.1.0-beta-1] - 2026-07-15
 
 ### Added
