@@ -11,8 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- AAR059 - AvroRecordNameCamelCase: The `name` field of every Avro record (including records nested inside `fields[].type`, unions, arrays and maps) must be in CamelCase with an uppercase first letter.
-
 ### Changed
 
 ### Removed
@@ -26,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - AAR050 - InfoTitleRequired: The `info.title` field must exist and not be empty.
+- AAR059 - AvroRecordNameCamelCase: The `name` field of every Avro record (including records nested inside `fields[].type`, unions, arrays and maps) must be in CamelCase with an uppercase first letter.
 
 ## [1.0.0] - 2025-12-29
 
