@@ -125,7 +125,7 @@ All rules support **AsyncAPI 2.x** by default. Rules that differ structurally fo
 
 ## Custom Functions
 
-The ruleset includes 11 custom Spectral functions for complex validation logic:
+The ruleset includes 10 custom Spectral functions for complex validation logic:
 
 | Function | Used by | Purpose |
 |----------|---------|---------|

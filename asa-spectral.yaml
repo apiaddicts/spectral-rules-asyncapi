@@ -24,7 +24,6 @@ functions:
   - asa-channel-servers-defined
   - asa-binding-version
   - asa-message-schemas-in-components
-  - asa-retry-topic-naming-convention
   - asa-avro-record-name-camel-case
 extends: ["spectral:asyncapi"]
 rules:

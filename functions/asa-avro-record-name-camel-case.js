@@ -5,7 +5,7 @@
  * @returns {Array} Array of error objects
  */
 
-const CAMEL_CASE_PATTERN = /^[A-Z][a-z0-9]+(?:[A-Z][a-z0-9]*)*$/;
+const CAMEL_CASE_PATTERN = /^[A-Z][a-z0-9]{1,62}(?:[A-Z][a-z0-9]{0,62}){0,20}$/;
 
 module.exports = (record, _options, context) => {
   const name = record && record.name;
