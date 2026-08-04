@@ -24,6 +24,7 @@ functions:
   - asa-channel-servers-defined
   - asa-binding-version
   - asa-message-schemas-in-components
+  - asa-processor-function-name-paired
 extends: ["spectral:asyncapi"]
 rules:
   # ===========================================================================
@@ -529,3 +530,13 @@ rules:
     then:
       field: "title"
       function: truthy
+
+  asa:AAR061:
+    description: "Paired processor operations (v2 publish/subscribe, v3 send/receive) must share the same x-scs-function-name so the JAPI generator links them as a single processor."
+    message: "AAR061: {{error}}"
+    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar061"
+    severity: warn
+    resolved: false
+    given: "$"
+    then:
+      function: asa-processor-function-name-paired

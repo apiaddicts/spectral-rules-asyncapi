@@ -1,0 +1,27 @@
+module.exports = {
+  asyncapi: "2.6.0",
+  info: {
+    version: "1.0.0",
+    title: "Processor Function Name Paired - OK Scenarios",
+  },
+  channels: {
+    "a-in": {
+      publish: { operationId: "consumeA", "x-scs-function-name": "processAtoB" },
+    },
+    "b-out": {
+      subscribe: { operationId: "produceB", "x-scs-function-name": "processAtoB" },
+    },
+    "a-in-again": {
+      publish: { operationId: "consumeAagain", "x-scs-function-name": "processAtoB" },
+    },
+    "c-in": {
+      publish: { operationId: "consumeC", "x-scs-function-name": "processCtoD" },
+    },
+    "d-out": {
+      subscribe: { operationId: "produceD", "x-scs-function-name": "processCtoD" },
+    },
+    "no-function-name": {
+      publish: { operationId: "plainOperation" },
+    },
+  },
+};
