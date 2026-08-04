@@ -24,6 +24,7 @@ functions:
   - asa-channel-servers-defined
   - asa-binding-version
   - asa-message-schemas-in-components
+  - asa-content-type-avro
 extends: ["spectral:asyncapi"]
 rules:
   # ===========================================================================
@@ -529,3 +530,13 @@ rules:
     then:
       field: "title"
       function: truthy
+
+  asa:AAR060:
+    description: "A message's contentType (and the document-level defaultContentType) must match 'application/*+avro' so Confluent's KafkaAvroDeserializer can deserialize the payload."
+    message: "AAR060: {{error}}"
+    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar060"
+    severity: error
+    resolved: false
+    given: "$"
+    then:
+      function: asa-content-type-avro
