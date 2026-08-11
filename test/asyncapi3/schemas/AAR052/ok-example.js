@@ -68,6 +68,34 @@ module.exports = {
           }
         }
       }
+    },
+    "ordersEnumValid": {
+      "address": "orders/enum-valid",
+      "messages": {
+        "OrderValue": {
+          "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
+          "payload": {
+            "type": "enum",
+            "name": "OrderStatus",
+            "namespace": "org.madrid.p001.core.orders",
+            "symbols": ["NEW", "SHIPPED"]
+          }
+        }
+      }
+    },
+    "ordersFixedValid": {
+      "address": "orders/fixed-valid",
+      "messages": {
+        "OrderValue": {
+          "schemaFormat": "application/vnd.apache.avro;version=1.9.0",
+          "payload": {
+            "type": "fixed",
+            "name": "OrderHash",
+            "namespace": "org.madrid.p001.core.orders",
+            "size": 16
+          }
+        }
+      }
     }
   },
   "operations": {

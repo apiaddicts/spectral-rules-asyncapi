@@ -111,7 +111,7 @@ spectral lint your-asyncapi.yaml
 | **AAR024** | `warn` | Messages must comply with the payload schema (examples validated). |
 | **AAR026** | `info` | Message schemas should be defined in `components.messages` and referenced via `$ref`. |
 | **AAR031** | `warn` | Message examples must follow the declared payload and headers schemas. |
-| **AAR052** | `error` | The namespace of an Avro schema must follow the corporate pattern. |
+| **AAR052** | `error` | The namespace of a named Avro schema (record, enum or fixed) is required and must follow the corporate pattern. |
 
 ---
 
