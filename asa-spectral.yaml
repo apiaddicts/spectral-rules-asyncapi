@@ -18,12 +18,14 @@ functions:
   - asa-check-security-schemes
   - asa-description-format
   - asa-duplicate-operation-id
+  - asa-operation-id-camel-case
   - asa-message-examples-validation
   - asa-numeric-parameter-integrity
   - asa-string-parameter-integrity
   - asa-channel-servers-defined
   - asa-binding-version
   - asa-message-schemas-in-components
+  - asa-avro-namespace-pattern
 extends: ["spectral:asyncapi"]
 rules:
   # ===========================================================================
@@ -392,6 +394,7 @@ rules:
     then:
       function: asa-message-examples-validation
 
+
   # ---------------------------------------------------------------------------
   # AAR032 - NumericParameterIntegrity
   # Numeric parameters should have minimum, maximum, or format restriction.
@@ -529,3 +532,27 @@ rules:
     then:
       field: "title"
       function: truthy
+
+  asa:AAR051:
+    description: "Every operation's operationId must be present and follow camelCase naming convention."
+    message: "AAR051: {{error}}"
+    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar051"
+    severity: error
+    given:
+      - "$.channels[*][publish,subscribe]"
+      - "$.operations[*]"
+    then:
+      function: asa-operation-id-camel-case
+
+  asa:AAR052:
+    description: "The namespace of a named Avro schema (record, enum or fixed) is required and must follow the corporate pattern: org.madrid.<cod_poaps>.<classification>.<domain> for application schemas, or org.madrid.common.<domain> for common schemas."
+    message: "AAR052: {{error}}"
+    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar052"
+    severity: error
+    resolved: false
+    given:
+      - "$..[?(@ && (@.type=='record' || @.type=='enum' || @.type=='fixed'))]"
+    then:
+      function: asa-avro-namespace-pattern
+      functionOptions:
+        pattern: "^org\\.madrid\\.(common\\.[a-z0-9_-]+|[a-z0-9_-]+\\.[a-z0-9_-]+\\.[a-z0-9_-]+)$"
