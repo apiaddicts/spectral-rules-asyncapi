@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AAR050 - InfoTitleRequired: The `info.title` field must exist and not be empty.
 - AAR051 - OperationIdCamelCase: Validates that every operation's `operationId` is present and follows camelCase naming convention.
 - AAR052 - AvroNamespacePattern: Validates that the namespace of a named Avro schema (`record`, `enum` or `fixed`) is present and follows the corporate pattern (`org.madrid.<cod_poaps>.<classification>.<domain>` or `org.madrid.common.<domain>`).
+- AAR053 - ChannelNamingConvention: Validates that the channel/topic name follows the corporate Kafka-topic naming pattern (`<cod_poaps>.<classification>.<domain>.<origin>.<scope>[.<version>]`).
 - AAR054 - ClassificationValidValues: Validates that the channel/topic name's classification segment (2nd segment) is `cdc`, `cmd` or `sys`.
 
 ## [1.0.0] - 2025-12-29

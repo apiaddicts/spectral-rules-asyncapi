@@ -26,6 +26,7 @@ functions:
   - asa-binding-version
   - asa-message-schemas-in-components
   - asa-classification-valid-values
+  - asa-channel-naming-convention
   - asa-avro-namespace-pattern
 extends: ["spectral:asyncapi"]
 rules:
@@ -557,6 +558,17 @@ rules:
       function: asa-avro-namespace-pattern
       functionOptions:
         pattern: "^org\\.madrid\\.(common\\.[a-z0-9_-]+|[a-z0-9_-]+\\.[a-z0-9_-]+\\.[a-z0-9_-]+)$"
+
+  asa:AAR053:
+    description: "The channel/topic name must follow the corporate naming pattern: <cod_poaps>.<classification>.<domain>.<origin>.<scope>[.<version>]."
+    message: "AAR053: {{error}}"
+    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar053"
+    severity: error
+    given: "$.channels[*]"
+    then:
+      function: asa-channel-naming-convention
+      functionOptions:
+        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*){4}(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)?$"
 
   asa:AAR054:
     description: "The second segment of the channel/topic name (classification) must be one of: cdc (Change Data Capture), cmd (Command that triggers a domain modification) or sys (internal system topic, not intended for public consumption)."
