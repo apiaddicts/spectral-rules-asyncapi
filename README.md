@@ -103,6 +103,7 @@ spectral lint your-asyncapi.yaml
 | **AAR037** | `warn` | Bindings must specify a `bindingVersion`. |
 | **AAR042** | `info` | Messages should have a unique `messageId` identifier. |
 | **AAR050** | `error` | The `info.title` field must exist and not be empty. |
+| **AAR051** | `error` | Every operation's `operationId` must be present and follow camelCase naming convention. |
 
 ### Schema Rules
 
@@ -111,6 +112,7 @@ spectral lint your-asyncapi.yaml
 | **AAR024** | `warn` | Messages must comply with the payload schema (examples validated). |
 | **AAR026** | `info` | Message schemas should be defined in `components.messages` and referenced via `$ref`. |
 | **AAR031** | `warn` | Message examples must follow the declared payload and headers schemas. |
+| **AAR052** | `error` | The namespace of a named Avro schema (record, enum or fixed) is required and must follow the corporate pattern. |
 
 ---
 
@@ -132,6 +134,7 @@ The ruleset includes 12 custom Spectral functions for complex validation logic:
 | `asa-check-security-schemes` | AAR018 | Validates security scheme types and completeness |
 | `asa-description-format` | AAR036 | Checks description starts uppercase, ends with period |
 | `asa-duplicate-operation-id` | AAR013 | Detects duplicate operationId values across channels |
+| `asa-operation-id-camel-case` | AAR051 | Checks operationId is present and follows camelCase |
 | `asa-message-examples-validation` | AAR024, AAR031 | Validates message examples against schemas |
 | `asa-numeric-parameter-integrity` | AAR032 | Checks numeric properties have constraints |
 | `asa-string-parameter-integrity` | AAR033 | Checks string properties have constraints |
@@ -149,6 +152,7 @@ The ruleset includes 12 custom Spectral functions for complex validation logic:
 apiaddicts-asyncapi-style-guide-spectral/
 ├── .github/workflows/       # CI/CD configuration
 ├── functions/               # Custom Spectral rule functions
+│   ├── asa-avro-namespace-pattern.js
 │   ├── asa-binding-version.js
 │   ├── asa-channel-naming-convention.js
 │   ├── asa-channel-servers-defined.js
@@ -167,7 +171,9 @@ apiaddicts-asyncapi-style-guide-spectral/
 │   │   ├── format/          # Format/documentation tests
 │   │   └── schemas/         # Schema rule tests
 │   └── asyncapi3/           # AsyncAPI 3.x tests
-│       └── operations/      # Operations rule tests
+│       ├── operations/      # Operations rule tests
+│       ├── format/          # Format/documentation tests
+│       └── schemas/         # Schema rule tests
 ├── asa-spectral.yaml        # Main Spectral ruleset
 ├── package.json
 ├── CONTRIBUTING.md
