@@ -28,6 +28,18 @@ module.exports = {
     "beca..alumnos.registro-bonificacion.beca": {
       "description": "Channel name has a double dot (empty segment).",
       "subscribe": { "message": { "payload": { "type": "object" } } }
+    },
+    "beca.Cmd.alumnos.registro-bonificacion.beca": {
+      "description": "Channel name has an uppercase letter in a segment.",
+      "subscribe": { "message": { "payload": { "type": "object" } } }
+    },
+    "beca.cmd.alumnos.registro--bonificacion.beca": {
+      "description": "Channel name has a double internal hyphen.",
+      "subscribe": { "message": { "payload": { "type": "object" } } }
+    },
+    "becañ.cmd.alumnos.registro-bonificacion.beca": {
+      "description": "Channel name has a non-ASCII (accented) character in a segment.",
+      "subscribe": { "message": { "payload": { "type": "object" } } }
     }
   }
 };

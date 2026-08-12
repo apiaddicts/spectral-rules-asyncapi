@@ -26,6 +26,14 @@ module.exports = {
           }
         }
       }
+    },
+    "beca.cmd.alumnos.registro-bonificacion.beca.v3": {
+      "description": "Version 3 (version-segment value other than v2).",
+      "subscribe": { "message": { "payload": { "type": "object" } } }
+    },
+    "beca.cmd.alumnos.registro-bonificacion.beca.v10": {
+      "description": "Version 10 (multi-digit version segment).",
+      "subscribe": { "message": { "payload": { "type": "object" } } }
     }
   }
 };

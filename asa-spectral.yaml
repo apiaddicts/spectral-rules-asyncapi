@@ -24,7 +24,6 @@ functions:
   - asa-channel-servers-defined
   - asa-binding-version
   - asa-message-schemas-in-components
-  - asa-avro-namespace-pattern
   - asa-channel-naming-convention
 extends: ["spectral:asyncapi"]
 rules:
