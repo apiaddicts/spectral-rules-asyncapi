@@ -7,12 +7,9 @@
 const DEFAULT_VALID_VALUES = ["cdc", "cmd", "sys"];
 
 module.exports = (channel, options, context) => {
-  if (!channel || typeof channel !== "object") {
-    return [];
-  }
-
   const channelKey = context.path[context.path.length - 1];
-  const hasAddressField = Object.prototype.hasOwnProperty.call(channel, "address");
+  const isObject = channel !== null && typeof channel === "object";
+  const hasAddressField = isObject && Object.prototype.hasOwnProperty.call(channel, "address");
 
   let channelName;
   let path;
