@@ -80,6 +80,7 @@ spectral lint your-asyncapi.yaml
 | **AAR040** | `warn` | Channel servers must reference servers defined in the root `servers` object. |
 | **AAR041** | `info` | Servers and channels should be defined in `components` for reusability. |
 | **AAR053** | `error` | Channel/topic name must follow the corporate naming pattern `<cod_poaps>.<classification>.<domain>.<origin>.<scope>[.<version>]`. |
+| **AAR054** | `error` | Channel/topic classification (2nd segment) must be `cdc`, `cmd` or `sys`. |
 
 ### Format / Documentation Rules
 
@@ -143,6 +144,7 @@ The ruleset includes 12 custom Spectral functions for complex validation logic:
 | `asa-message-schemas-in-components` | AAR026 | Recommends $ref usage for message schemas |
 | `asa-avro-namespace-pattern` | AAR052 | Validates Avro namespace against the corporate pattern |
 | `asa-channel-naming-convention` | AAR053 | Validates channel/topic name against the corporate Kafka-topic naming pattern |
+| `asa-classification-valid-values` | AAR054 | Validates that the channel/topic classification segment is cdc, cmd or sys |
 
 ---
 
@@ -232,6 +234,7 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR051 | `asa:AAR051` | BUG | MAJOR |
 | AAR052 | `asa:AAR052` | BUG | MAJOR |
 | AAR053 | `asa:AAR053` | BUG | MAJOR |
+| AAR054 | `asa:AAR054` | BUG | MAJOR |
 
 ---
 
