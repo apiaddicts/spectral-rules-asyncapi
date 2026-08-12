@@ -79,6 +79,7 @@ spectral lint your-asyncapi.yaml
 | **AAR010** | `warn` | All tags should have a `description` field. |
 | **AAR040** | `warn` | Channel servers must reference servers defined in the root `servers` object. |
 | **AAR041** | `info` | Servers and channels should be defined in `components` for reusability. |
+| **AAR053** | `error` | Channel/topic name must follow the corporate naming pattern `<cod_poaps>.<classification>.<domain>.<origin>.<scope>[.<version>]`. |
 
 ### Format / Documentation Rules
 
@@ -126,7 +127,7 @@ All rules support **AsyncAPI 2.x** by default. Rules that differ structurally fo
 
 ## Custom Functions
 
-The ruleset includes 11 custom Spectral functions for complex validation logic:
+The ruleset includes 12 custom Spectral functions for complex validation logic:
 
 | Function | Used by | Purpose |
 |----------|---------|---------|
@@ -141,6 +142,7 @@ The ruleset includes 11 custom Spectral functions for complex validation logic:
 | `asa-binding-version` | AAR037 | Checks bindings have bindingVersion |
 | `asa-message-schemas-in-components` | AAR026 | Recommends $ref usage for message schemas |
 | `asa-avro-namespace-pattern` | AAR052 | Validates Avro namespace against the corporate pattern |
+| `asa-channel-naming-convention` | AAR053 | Validates channel/topic name against the corporate Kafka-topic naming pattern |
 
 ---
 
@@ -152,6 +154,7 @@ apiaddicts-asyncapi-style-guide-spectral/
 ├── functions/               # Custom Spectral rule functions
 │   ├── asa-avro-namespace-pattern.js
 │   ├── asa-binding-version.js
+│   ├── asa-channel-naming-convention.js
 │   ├── asa-channel-servers-defined.js
 │   ├── asa-check-security-schemes.js
 │   ├── asa-description-format.js
@@ -168,6 +171,7 @@ apiaddicts-asyncapi-style-guide-spectral/
 │   │   ├── format/          # Format/documentation tests
 │   │   └── schemas/         # Schema rule tests
 │   └── asyncapi3/           # AsyncAPI 3.x tests
+│       ├── operations/      # Operations rule tests
 │       ├── format/          # Format/documentation tests
 │       └── schemas/         # Schema rule tests
 ├── asa-spectral.yaml        # Main Spectral ruleset
@@ -227,6 +231,7 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR050 | `asa:AAR050` | BUG | MAJOR |
 | AAR051 | `asa:AAR051` | BUG | MAJOR |
 | AAR052 | `asa:AAR052` | BUG | MAJOR |
+| AAR053 | `asa:AAR053` | BUG | MAJOR |
 
 ---
 
