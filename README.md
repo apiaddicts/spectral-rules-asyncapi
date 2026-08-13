@@ -115,6 +115,7 @@ spectral lint your-asyncapi.yaml
 | **AAR026** | `info` | Message schemas should be defined in `components.messages` and referenced via `$ref`. |
 | **AAR031** | `warn` | Message examples must follow the declared payload and headers schemas. |
 | **AAR052** | `error` | The namespace of a named Avro schema (record, enum or fixed) is required and must follow the corporate pattern. |
+| **AAR055** | `warn` | The `x-payload-references` extension, wherever it appears, must have `subject`, `ref` and `referenceName` on every item. |
 
 ---
 
@@ -146,6 +147,7 @@ The ruleset includes 12 custom Spectral functions for complex validation logic:
 | `asa-avro-namespace-pattern` | AAR052 | Validates Avro namespace against the corporate pattern |
 | `asa-channel-naming-convention` | AAR053 | Validates channel/topic name against the corporate Kafka-topic naming pattern |
 | `asa-classification-valid-values` | AAR054 | Validates that the channel/topic classification segment is cdc, cmd or sys |
+| `asa-x-payload-references-well-formed` | AAR055 | Validates that x-payload-references items each have subject, ref and referenceName |
 | `asa-retry-topic-naming-convention` | AAR058 | Validates that retry channels follow the required retry-topic naming pattern |
 
 ---
@@ -167,6 +169,8 @@ apiaddicts-asyncapi-style-guide-spectral/
 │   ├── asa-message-schemas-in-components.js
 │   ├── asa-numeric-parameter-integrity.js
 │   ├── asa-string-parameter-integrity.js
+│   ├── asa-classification-valid-values.js
+│   ├── asa-x-payload-references-well-formed.js
 │   └── asa-retry-topic-naming-convention.js
 ├── test/
 │   ├── helpers/utils.js     # Test utilities
@@ -238,6 +242,7 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR052 | `asa:AAR052` | BUG | MAJOR |
 | AAR053 | `asa:AAR053` | BUG | MAJOR |
 | AAR054 | `asa:AAR054` | BUG | MAJOR |
+| AAR055 | `asa:AAR055` | BUG | MAJOR |
 | AAR058 | `asa:AAR058` | BUG | MINOR |
 
 ---

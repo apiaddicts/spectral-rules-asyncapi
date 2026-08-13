@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">11.76% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>2/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">11.76% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>2/17</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -115,36 +115,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -161,34 +161,34 @@
 const RETRY_TOPIC_PATTERN =
   /^[a-z0-9]{1,63}(?:-[a-z0-9]{1,63}){0,10}(?:\.[a-z0-9]{1,63}(?:-[a-z0-9]{1,63}){0,10}){1,20}\.retry\.\d{1,10}$/;
 &nbsp;
-module.exports = (channel, _options, context) =&gt; {
-  const channelKey = context.path[context.path.length - 1];
-  const isObject = channel !== null &amp;&amp; typeof channel === "object";
-  const hasAddressField = isObject &amp;&amp; Object.prototype.hasOwnProperty.call(channel, "address");
+module.exports = <span class="fstat-no" title="function not covered" >(c</span>hannel, _options, context) =&gt; {
+  const channelKey = <span class="cstat-no" title="statement not covered" >context.path[context.path.length - 1];</span>
+  const isObject = <span class="cstat-no" title="statement not covered" >channel !== null &amp;&amp; typeof channel === "object";</span>
+  const hasAddressField = <span class="cstat-no" title="statement not covered" >isObject &amp;&amp; Object.prototype.hasOwnProperty.call(channel, "address");</span>
 &nbsp;
   let channelName;
   let path;
 &nbsp;
-  if (hasAddressField) {
-    if (channel.address == null) {
-      return [];
+<span class="cstat-no" title="statement not covered" >  if (hasAddressField) {</span>
+<span class="cstat-no" title="statement not covered" >    if (channel.address == null) {</span>
+<span class="cstat-no" title="statement not covered" >      return [];</span>
     }
-    channelName = channel.address;
-    path = [...context.path, "address"];
+<span class="cstat-no" title="statement not covered" >    channelName = channel.address;</span>
+<span class="cstat-no" title="statement not covered" >    path = [...context.path, "address"];</span>
   } else {
-    channelName = channelKey;
-    path = [...context.path];
+<span class="cstat-no" title="statement not covered" >    channelName = channelKey;</span>
+<span class="cstat-no" title="statement not covered" >    path = [...context.path];</span>
   }
 &nbsp;
-  if (typeof channelName !== "string" || !channelName.includes(".retry.")) {
-    return [];
+<span class="cstat-no" title="statement not covered" >  if (typeof channelName !== "string" || !channelName.includes(".retry.")) {</span>
+<span class="cstat-no" title="statement not covered" >    return [];</span>
   }
 &nbsp;
-  if (RETRY_TOPIC_PATTERN.test(channelName)) {
-    return [];
+<span class="cstat-no" title="statement not covered" >  if (RETRY_TOPIC_PATTERN.test(channelName)) {</span>
+<span class="cstat-no" title="statement not covered" >    return [];</span>
   }
 &nbsp;
-  return [
+<span class="cstat-no" title="statement not covered" >  return [</span>
     {
       message: `Channel name '${channelName}' contains '.retry.' but does not follow the required pattern '&lt;topicOriginal&gt;.&lt;consumerGroup&gt;.retry.&lt;n&gt;' (e.g. 'beca.cmd.alumnos.solicitud.beca.grupo1.retry.1') required by Spring for automatic retry reprocessing.`,
       path,
@@ -202,7 +202,7 @@ module.exports = (channel, _options, context) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-22T21:17:11.496Z
+                at 2026-08-13T14:06:27.890Z
             </div>
         <script src="prettify.js"></script>
         <script>

@@ -25,6 +25,7 @@ functions:
   - asa-channel-servers-defined
   - asa-binding-version
   - asa-message-schemas-in-components
+  - asa-x-payload-references-well-formed
   - asa-retry-topic-naming-convention
   - asa-classification-valid-values
   - asa-channel-naming-convention
@@ -581,6 +582,15 @@ rules:
       function: asa-classification-valid-values
       functionOptions:
         validValues: ["cdc", "cmd", "sys"]
+
+  asa:AAR055:
+    description: "When the x-payload-references extension exists, each item must contain three required, non-empty fields: 'subject' (schema name in the registry), 'ref' (SVN URL of the .avsc file) and 'referenceName' (fully qualified Avro type name, e.g. org.madrid.core.payload.alumnos.Ciudadano)."
+    message: "AAR055: {{error}}"
+    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar055"
+    severity: warn
+    given: "$..x-payload-references"
+    then:
+      function: asa-x-payload-references-well-formed
 
   asa:AAR058:
     description: "If a channel name contains '.retry.', it must follow the pattern '<topicOriginal>.<consumerGroup>.retry.<n>' (e.g. 'beca.cmd.alumnos.solicitud.beca.grupo1.retry.1'), required by Spring for automatic retry reprocessing."
