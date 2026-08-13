@@ -31,6 +31,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AAR054 - ClassificationValidValues: Validates that the channel/topic name's classification segment (2nd segment) is `cdc`, `cmd` or `sys`.
 - AAR055 - XPayloadReferencesWellFormed: Validates that the `x-payload-references` extension, wherever it appears, contains `subject`, `ref` and `referenceName` on every item.
 - AAR058 - RetryTopicNamingConvention: If a channel name contains `.retry.`, it must follow `<topicOriginal>.<consumerGroup>.retry.<n>`.
+- Unit tests for AAR032, AAR033 and AAR034, each with `fail`/`ok` examples.
+- `asa-numeric-format` custom function backing AAR034.
+
+### Changed
+
+- Corrected rule descriptions so they describe what each rule actually validates:
+  - AAR001: "HTTPS protocol is mandatory" to "Servers must use a secure protocol" (the rule also accepts `wss`, `amqps`, etc.).
+  - AAR012: dropped the misleading "unique" (uniqueness is AAR013's concern; AAR012 only requires the `operationId` to be present).
+  - AAR032 / AAR033: "parameters" to "properties", and the restriction list widened to the full set the functions actually accept (`enum`, `const`, `format`).
+- AAR032 / AAR033 / AAR034 `given` now also covers AsyncAPI 3 message payloads (`channels[*].messages[*].payload`) and `components.messages[*].payload`, with `resolved: false` so a schema shared via `$ref` is reported once at its definition.
+
+### Fixed
+
+- **AAR034 (NumericFormat)** never reported anything: its `given` applied a `[?(@.type === ...)]` filter immediately after `..properties[*]`, which Spectral's JSONPath resolves to zero nodes. Rewritten as the `asa-numeric-format` custom function that checks the property `type` internally.
 
 ## [1.0.0] - 2025-12-29
 

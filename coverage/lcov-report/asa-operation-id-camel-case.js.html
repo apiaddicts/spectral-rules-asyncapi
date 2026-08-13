@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/10</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">92.3% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>12/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/10</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -110,26 +110,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -137,7 +128,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * AAR051 - OperationIdCamelCase
@@ -150,15 +150,15 @@
  */
 const CAMEL_CASE_PATTERN = /^[a-z][a-zA-Z0-9]*$/;
 &nbsp;
-module.exports = <span class="fstat-no" title="function not covered" >(o</span>peration, _options, context) =&gt; {
-<span class="cstat-no" title="statement not covered" >  if (!operation || typeof operation !== "object") {</span>
+module.exports = (operation, _options, context) =&gt; {
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (!operation || typeof operation !== "object") {
 <span class="cstat-no" title="statement not covered" >    return [];</span>
   }
 &nbsp;
-  const operationId = <span class="cstat-no" title="statement not covered" >operation.operationId;</span>
+  const operationId = operation.operationId;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (operationId === undefined || operationId === null || operationId === "") {</span>
-<span class="cstat-no" title="statement not covered" >    return [</span>
+  if (operationId === undefined || operationId === null || operationId === "") {
+    return [
       {
         message: "Operation must declare a non-empty 'operationId'.",
         path: [...context.path, "operationId"],
@@ -166,8 +166,8 @@ module.exports = <span class="fstat-no" title="function not covered" >(o</span>p
     ];
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (typeof operationId !== "string" || !CAMEL_CASE_PATTERN.test(operationId)) {</span>
-<span class="cstat-no" title="statement not covered" >    return [</span>
+  if (typeof operationId !== "string" || !CAMEL_CASE_PATTERN.test(operationId)) {
+    return [
       {
         message: `'operationId' must follow camelCase naming convention (e.g. 'solicitarBeca'). Found: '${operationId}'.`,
         path: [...context.path, "operationId"],
@@ -175,7 +175,7 @@ module.exports = <span class="fstat-no" title="function not covered" >(o</span>p
     ];
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return [];</span>
+  return [];
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -184,7 +184,7 @@ module.exports = <span class="fstat-no" title="function not covered" >(o</span>p
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-08-13T14:06:27.890Z
+                at 2026-08-13T18:13:50.077Z
             </div>
         <script src="prettify.js"></script>
         <script>
