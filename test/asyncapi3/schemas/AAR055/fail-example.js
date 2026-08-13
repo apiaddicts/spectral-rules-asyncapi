@@ -90,6 +90,74 @@ module.exports = {
           ]
         }
       }
+    },
+    "scholarshipRegistrationInvalidRef": {
+      "address": "beca.evt.alumnos.registro-bonificacion.invalid-ref",
+      "messages": {
+        "Registration": {
+          "payload": {
+            "type": "object"
+          },
+          "x-payload-references": [
+            {
+              "subject": "Ciudadano",
+              "ref": "no-es-url",
+              "referenceName": "org.madrid.core.payload.alumnos.Ciudadano"
+            }
+          ]
+        }
+      }
+    },
+    "scholarshipRegistrationInvalidReferenceName": {
+      "address": "beca.evt.alumnos.registro-bonificacion.invalid-reference-name",
+      "messages": {
+        "Registration": {
+          "payload": {
+            "type": "object"
+          },
+          "x-payload-references": [
+            {
+              "subject": "Ciudadano",
+              "ref": "https://svn.example.com/schemas/avro/Ciudadano.avsc",
+              "referenceName": "cualquier_cosa"
+            }
+          ]
+        }
+      }
+    },
+    "scholarshipRegistrationInvalidSubject": {
+      "address": "beca.evt.alumnos.registro-bonificacion.invalid-subject",
+      "messages": {
+        "Registration": {
+          "payload": {
+            "type": "object"
+          },
+          "x-payload-references": [
+            {
+              "subject": "has space",
+              "ref": "https://svn.example.com/schemas/avro/Ciudadano.avsc",
+              "referenceName": "org.madrid.core.payload.alumnos.Ciudadano"
+            }
+          ]
+        }
+      }
+    },
+    "scholarshipRegistrationReviewerExample": {
+      "address": "beca.evt.alumnos.registro-bonificacion.reviewer-example",
+      "messages": {
+        "Registration": {
+          "payload": {
+            "type": "object"
+          },
+          "x-payload-references": [
+            {
+              "subject": "x",
+              "ref": "no-es-url",
+              "referenceName": "cualquier_cosa"
+            }
+          ]
+        }
+      }
     }
   },
   "components": {

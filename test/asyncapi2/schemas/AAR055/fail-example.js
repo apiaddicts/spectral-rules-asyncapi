@@ -85,6 +85,70 @@ module.exports = {
           ]
         }
       }
+    },
+    "beca.evt.alumnos.registro-bonificacion.invalid-ref": {
+      "subscribe": {
+        "message": {
+          "payload": {
+            "type": "object"
+          },
+          "x-payload-references": [
+            {
+              "subject": "Ciudadano",
+              "ref": "no-es-url",
+              "referenceName": "org.madrid.core.payload.alumnos.Ciudadano"
+            }
+          ]
+        }
+      }
+    },
+    "beca.evt.alumnos.registro-bonificacion.invalid-reference-name": {
+      "subscribe": {
+        "message": {
+          "payload": {
+            "type": "object"
+          },
+          "x-payload-references": [
+            {
+              "subject": "Ciudadano",
+              "ref": "https://svn.example.com/schemas/avro/Ciudadano.avsc",
+              "referenceName": "cualquier_cosa"
+            }
+          ]
+        }
+      }
+    },
+    "beca.evt.alumnos.registro-bonificacion.invalid-subject": {
+      "subscribe": {
+        "message": {
+          "payload": {
+            "type": "object"
+          },
+          "x-payload-references": [
+            {
+              "subject": "has space",
+              "ref": "https://svn.example.com/schemas/avro/Ciudadano.avsc",
+              "referenceName": "org.madrid.core.payload.alumnos.Ciudadano"
+            }
+          ]
+        }
+      }
+    },
+    "beca.evt.alumnos.registro-bonificacion.reviewer-example": {
+      "subscribe": {
+        "message": {
+          "payload": {
+            "type": "object"
+          },
+          "x-payload-references": [
+            {
+              "subject": "x",
+              "ref": "no-es-url",
+              "referenceName": "cualquier_cosa"
+            }
+          ]
+        }
+      }
     }
   },
   "components": {
