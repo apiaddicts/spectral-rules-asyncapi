@@ -8,8 +8,8 @@ const REQUIRED_FIELDS = ["subject", "ref", "referenceName"];
 
 const FIELD_PATTERNS = {
   subject: /^[:a-zA-Z0-9_.-]+$/,
-  ref: /^(?:https?|svn|svn\+ssh|file):\/\/\S+\.avsc(?:[?@]\S*)?$/,
-  referenceName: /^[a-z][a-z0-9_]{0,62}(?:\.[a-z][a-z0-9_]{0,62}){0,20}\.[A-Z][A-Za-z0-9_]{0,62}$/,
+  ref: /^(?:https?|svn|svn\+ssh|file):\/\/[^\s?@]+\.avsc(?:[?@]\S*)?$/,
+  referenceName: /^[a-z][a-z0-9_]{0,62}(?:\.[a-z][a-z0-9_]{0,62}){0,20}\.[A-Z]\w{0,62}$/,
 };
 
 const FIELD_FORMAT_MESSAGES = {
