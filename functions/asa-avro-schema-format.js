@@ -8,7 +8,7 @@ const AVRO_SCHEMA_FORMAT_PREFIX = "application/vnd.apache.avro";
 const EXPECTED_SCHEMA_FORMAT = "application/vnd.apache.avro;version=1.9.0";
 
 module.exports = (schemaFormat, _options, context) => {
-  if (typeof schemaFormat !== "string" || !schemaFormat.includes(AVRO_SCHEMA_FORMAT_PREFIX)) {
+  if (typeof schemaFormat !== "string" || !schemaFormat.toLowerCase().includes(AVRO_SCHEMA_FORMAT_PREFIX)) {
     return [];
   }
 
