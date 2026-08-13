@@ -25,6 +25,7 @@ functions:
   - asa-channel-servers-defined
   - asa-binding-version
   - asa-message-schemas-in-components
+  - asa-retry-topic-naming-convention
   - asa-classification-valid-values
   - asa-channel-naming-convention
   - asa-avro-namespace-pattern
@@ -580,3 +581,12 @@ rules:
       function: asa-classification-valid-values
       functionOptions:
         validValues: ["cdc", "cmd", "sys"]
+
+  asa:AAR058:
+    description: "If a channel name contains '.retry.', it must follow the pattern '<topicOriginal>.<consumerGroup>.retry.<n>' (e.g. 'beca.cmd.alumnos.solicitud.beca.grupo1.retry.1'), required by Spring for automatic retry reprocessing."
+    message: "AAR058: {{error}}"
+    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar058"
+    severity: warn
+    given: "$.channels[*]"
+    then:
+      function: asa-retry-topic-naming-convention

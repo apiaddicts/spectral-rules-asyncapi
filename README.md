@@ -81,6 +81,7 @@ spectral lint your-asyncapi.yaml
 | **AAR041** | `info` | Servers and channels should be defined in `components` for reusability. |
 | **AAR053** | `error` | Channel/topic name must follow the corporate naming pattern `<cod_poaps>.<classification>.<domain>.<origin>.<scope>[.<version>]`. |
 | **AAR054** | `error` | Channel/topic classification (2nd segment) must be `cdc`, `cmd` or `sys`. |
+| **AAR058** | `warn` | If a channel name contains `.retry.`, it must follow `<topicOriginal>.<consumerGroup>.retry.<n>`. |
 
 ### Format / Documentation Rules
 
@@ -145,6 +146,7 @@ The ruleset includes 12 custom Spectral functions for complex validation logic:
 | `asa-avro-namespace-pattern` | AAR052 | Validates Avro namespace against the corporate pattern |
 | `asa-channel-naming-convention` | AAR053 | Validates channel/topic name against the corporate Kafka-topic naming pattern |
 | `asa-classification-valid-values` | AAR054 | Validates that the channel/topic classification segment is cdc, cmd or sys |
+| `asa-retry-topic-naming-convention` | AAR058 | Validates that retry channels follow the required retry-topic naming pattern |
 
 ---
 
@@ -164,7 +166,8 @@ apiaddicts-asyncapi-style-guide-spectral/
 │   ├── asa-message-examples-validation.js
 │   ├── asa-message-schemas-in-components.js
 │   ├── asa-numeric-parameter-integrity.js
-│   └── asa-string-parameter-integrity.js
+│   ├── asa-string-parameter-integrity.js
+│   └── asa-retry-topic-naming-convention.js
 ├── test/
 │   ├── helpers/utils.js     # Test utilities
 │   ├── asyncapi2/           # AsyncAPI 2.x tests
@@ -235,6 +238,7 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR052 | `asa:AAR052` | BUG | MAJOR |
 | AAR053 | `asa:AAR053` | BUG | MAJOR |
 | AAR054 | `asa:AAR054` | BUG | MAJOR |
+| AAR058 | `asa:AAR058` | BUG | MINOR |
 
 ---
 
