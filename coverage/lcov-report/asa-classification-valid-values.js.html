@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for asa-description-format.js</title>
+    <title>Code coverage report for asa-classification-valid-values.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> asa-description-format.js</h1>
+        <h1><a href="index.html">All files</a> asa-classification-valid-values.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.66% </span>
+                <span class="strong">10% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/15</span>
+                <span class='fraction'>2/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>0/19</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.66% </span>
+                <span class="strong">10% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/15</span>
+                <span class='fraction'>2/20</span>
             </div>
         
             
@@ -116,40 +116,40 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -158,51 +158,51 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
- * AAR036 - BadDescription
- * Validates that descriptions begin with a capital letter and end with a period.
- *
- * @param {object} given - The object containing a 'description' field
- * @param {object} _options - Unused options
+ * @param {object} channel - The channel object (AsyncAPI 2.x or 3.x)
+ * @param {object} options - Function options, e.g. { validValues: ["cdc", "cmd", "sys"] }
  * @param {import('@stoplight/spectral-core').RulesetFunctionContext} context
  * @returns {Array} Array of error objects
  */
-module.exports = <span class="fstat-no" title="function not covered" >(g</span>iven, _options, context) =&gt; {
-  const errors = <span class="cstat-no" title="statement not covered" >[];</span>
+const DEFAULT_VALID_VALUES = ["cdc", "cmd", "sys"];
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (!given || typeof given !== "object") {</span>
-<span class="cstat-no" title="statement not covered" >    return errors;</span>
+module.exports = <span class="fstat-no" title="function not covered" >(c</span>hannel, options, context) =&gt; {
+  const channelKey = <span class="cstat-no" title="statement not covered" >context.path[context.path.length - 1];</span>
+  const isObject = <span class="cstat-no" title="statement not covered" >channel !== null &amp;&amp; typeof channel === "object";</span>
+  const hasAddressField = <span class="cstat-no" title="statement not covered" >isObject &amp;&amp; Object.prototype.hasOwnProperty.call(channel, "address");</span>
+&nbsp;
+  let channelName;
+  let path;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (hasAddressField) {</span>
+<span class="cstat-no" title="statement not covered" >    if (channel.address === null) {</span>
+<span class="cstat-no" title="statement not covered" >      return [];</span>
+    }
+<span class="cstat-no" title="statement not covered" >    channelName = channel.address;</span>
+<span class="cstat-no" title="statement not covered" >    path = [...context.path, "address"];</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    channelName = channelKey;</span>
+<span class="cstat-no" title="statement not covered" >    path = [...context.path];</span>
   }
 &nbsp;
-  const description = <span class="cstat-no" title="statement not covered" >given.description;</span>
-&nbsp;
-  // If no description, skip (AAR029 handles missing descriptions)
-<span class="cstat-no" title="statement not covered" >  if (!description || typeof description !== "string") {</span>
-<span class="cstat-no" title="statement not covered" >    return errors;</span>
+<span class="cstat-no" title="statement not covered" >  if (channelName === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >    return [];</span>
   }
 &nbsp;
-  const trimmed = <span class="cstat-no" title="statement not covered" >description.trim();</span>
+<span class="cstat-no" title="statement not covered" >  channelName = String(channelName);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (trimmed.length === 0) {</span>
-<span class="cstat-no" title="statement not covered" >    return errors;</span>
+  const validValues = <span class="cstat-no" title="statement not covered" >(options &amp;&amp; options.validValues) || DEFAULT_VALID_VALUES;</span>
+  const classification = <span class="cstat-no" title="statement not covered" >channelName.split(".")[1];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (!classification || !validValues.includes(classification)) {</span>
+<span class="cstat-no" title="statement not covered" >    return [</span>
+      {
+        message: `Channel name '${channelName}' has an invalid classification segment '${classification || ""}'. The second segment must be one of: ${validValues.join(", ")}.`,
+        path,
+      },
+    ];
   }
 &nbsp;
-  // Check starts with uppercase
-<span class="cstat-no" title="statement not covered" >  if (!/^[A-Z]/.test(trimmed)) {</span>
-<span class="cstat-no" title="statement not covered" >    errors.push({</span>
-      message: `Description must begin with a capital letter. Found: "${trimmed.substring(0, 30)}..."`,
-      path: [...context.path, "description"],
-    });
-  }
-&nbsp;
-  // Check ends with period
-<span class="cstat-no" title="statement not covered" >  if (!/\.\s*$/.test(trimmed)) {</span>
-<span class="cstat-no" title="statement not covered" >    errors.push({</span>
-      message: `Description must end with a period. Found: "...${trimmed.substring(Math.max(0, trimmed.length - 30))}"`,
-      path: [...context.path, "description"],
-    });
-  }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  return errors;</span>
+<span class="cstat-no" title="statement not covered" >  return [];</span>
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -211,7 +211,7 @@ module.exports = <span class="fstat-no" title="function not covered" >(g</span>i
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-21T21:53:15.439Z
+                at 2026-08-13T14:06:27.890Z
             </div>
         <script src="prettify.js"></script>
         <script>
