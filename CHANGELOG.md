@@ -19,8 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-
-## [1.1.0-beta-1] - 2026-07-15
+## [1.1.0-beta-1] - 2026-07-21
 
 ### Added
 
@@ -30,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AAR053 - ChannelNamingConvention: Validates that the channel/topic name follows the corporate Kafka-topic naming pattern (`<cod_poaps>.<classification>.<domain>.<origin>.<scope>[.<version>]`).
 - AAR054 - ClassificationValidValues: Validates that the channel/topic name's classification segment (2nd segment) is `cdc`, `cmd` or `sys`.
 - AAR055 - XPayloadReferencesWellFormed: Validates that the `x-payload-references` extension, wherever it appears, contains `subject`, `ref` and `referenceName` on every item.
+- AAR056 - AvroSchemaFormat: When the payload uses Avro, `schemaFormat` must be exactly `application/vnd.apache.avro;version=1.9.0`.
 - AAR058 - RetryTopicNamingConvention: If a channel name contains `.retry.`, it must follow `<topicOriginal>.<consumerGroup>.retry.<n>`.
 
 ## [1.0.0] - 2025-12-29
