@@ -19,7 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-## [1.1.0-beta-1] - 2026-07-21
+
+## [1.1.0-beta-1] - 2026-07-15
 
 ### Added
 
@@ -30,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AAR054 - ClassificationValidValues: Validates that the channel/topic name's classification segment (2nd segment) is `cdc`, `cmd` or `sys`.
 - AAR055 - XPayloadReferencesWellFormed: Validates that the `x-payload-references` extension, wherever it appears, contains `subject`, `ref` and `referenceName` on every item.
 - AAR056 - AvroSchemaFormat: When the payload uses Avro, `schemaFormat` must be exactly `application/vnd.apache.avro;version=1.9.0`.
+- AAR057 - ErrorTopicDocumented: At least one channel must be documented as an error topic following `<topicOriginal>.[<consumerGroup>.]error.<n>`.
 - AAR058 - RetryTopicNamingConvention: If a channel name contains `.retry.`, it must follow `<topicOriginal>.<consumerGroup>.retry.<n>`.
 
 ## [1.0.0] - 2025-12-29

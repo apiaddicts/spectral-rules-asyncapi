@@ -81,6 +81,7 @@ spectral lint your-asyncapi.yaml
 | **AAR041** | `info` | Servers and channels should be defined in `components` for reusability. |
 | **AAR053** | `error` | Channel/topic name must follow the corporate naming pattern `<cod_poaps>.<classification>.<domain>.<origin>.<scope>[.<version>]`. |
 | **AAR054** | `error` | Channel/topic classification (2nd segment) must be `cdc`, `cmd` or `sys`. |
+| **AAR057** | `error` | At least one channel must be documented as an error topic following `<topicOriginal>.[<consumerGroup>.]error.<n>`. |
 | **AAR058** | `warn` | If a channel name contains `.retry.`, it must follow `<topicOriginal>.<consumerGroup>.retry.<n>`. |
 
 ### Format / Documentation Rules
@@ -150,6 +151,7 @@ The ruleset includes 12 custom Spectral functions for complex validation logic:
 | `asa-classification-valid-values` | AAR054 | Validates that the channel/topic classification segment is cdc, cmd or sys |
 | `asa-x-payload-references-well-formed` | AAR055 | Validates that x-payload-references items each have subject, ref and referenceName |
 | `asa-avro-schema-format` | AAR056 | Validates that an Avro schemaFormat is exactly application/vnd.apache.avro;version=1.9.0 |
+| `asa-error-topic-documented` | AAR057 | Validates that at least one channel is documented as an error topic |
 | `asa-retry-topic-naming-convention` | AAR058 | Validates that retry channels follow the required retry-topic naming pattern |
 
 ---
@@ -170,6 +172,7 @@ apiaddicts-asyncapi-style-guide-spectral/
 │   ├── asa-message-examples-validation.js
 │   ├── asa-message-schemas-in-components.js
 │   ├── asa-numeric-parameter-integrity.js
+│   ├── asa-error-topic-documented.js
 │   ├── asa-avro-schema-format.js
 │   ├── asa-string-parameter-integrity.js
 │   ├── asa-classification-valid-values.js
@@ -247,6 +250,7 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR054 | `asa:AAR054` | BUG | MAJOR |
 | AAR055 | `asa:AAR055` | BUG | MAJOR |
 | AAR056 | `asa:AAR056` | BUG | MAJOR |
+| AAR057 | `asa:AAR057` | BUG | MAJOR |
 | AAR058 | `asa:AAR058` | BUG | MINOR |
 
 ---
