@@ -6,7 +6,7 @@
  */
 
 const ERROR_TOPIC_PATTERN =
-  /^[a-z0-9]{1,63}(?:-[a-z0-9]{1,63}){0,10}(?:\.[a-z0-9]{1,63}(?:-[a-z0-9]{1,63}){0,10}){1,20}\.error\.\d{1,10}$/;
+  /^[a-z0-9]{1,63}(?:-[a-z0-9]{1,63}){0,10}(?:\.[a-z0-9]{1,63}(?:-[a-z0-9]{1,63}){0,10}){0,20}\.error\.\d{1,10}$/;
 
 function isVersion3Plus(document) {
   const version = typeof document.asyncapi === "string" ? document.asyncapi.trim() : "";

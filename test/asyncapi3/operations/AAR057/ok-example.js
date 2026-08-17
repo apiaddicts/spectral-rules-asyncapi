@@ -5,6 +5,14 @@ module.exports = {
     "title": "Error Topic Documented - Pass Scenarios"
   },
   "channels": {
+    "dynamicReplyChannel": {
+      "address": null,
+      "messages": {
+        "ReplyMessage": {
+          "payload": { "type": "object" }
+        }
+      }
+    },
     "solicitudBeca": {
       "address": "beca.cmd.alumnos.solicitud.beca",
       "messages": {
@@ -17,14 +25,6 @@ module.exports = {
       "address": "beca.cmd.alumnos.solicitud.beca.grupo1.error.1",
       "messages": {
         "SolicitudBecaErrorMessage": {
-          "payload": { "type": "object" }
-        }
-      }
-    },
-    "dynamicReplyChannel": {
-      "address": null,
-      "messages": {
-        "ReplyMessage": {
           "payload": { "type": "object" }
         }
       }
