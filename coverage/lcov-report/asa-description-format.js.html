@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">6.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/15</span>
+                <span class='fraction'>1/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.71% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>12/14</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">6.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/15</span>
+                <span class='fraction'>1/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -119,43 +119,43 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * AAR036 - BadDescription
@@ -166,43 +166,43 @@
  * @param {import('@stoplight/spectral-core').RulesetFunctionContext} context
  * @returns {Array} Array of error objects
  */
-module.exports = (given, _options, context) =&gt; {
-  const errors = [];
+module.exports = <span class="fstat-no" title="function not covered" >(g</span>iven, _options, context) =&gt; {
+  const errors = <span class="cstat-no" title="statement not covered" >[];</span>
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (!given || typeof given !== "object") {
+<span class="cstat-no" title="statement not covered" >  if (!given || typeof given !== "object") {</span>
 <span class="cstat-no" title="statement not covered" >    return errors;</span>
   }
 &nbsp;
-  const description = given.description;
+  const description = <span class="cstat-no" title="statement not covered" >given.description;</span>
 &nbsp;
   // If no description, skip (AAR029 handles missing descriptions)
-  if (!description || typeof description !== "string") {
-    return errors;
+<span class="cstat-no" title="statement not covered" >  if (!description || typeof description !== "string") {</span>
+<span class="cstat-no" title="statement not covered" >    return errors;</span>
   }
 &nbsp;
-  const trimmed = description.trim();
+  const trimmed = <span class="cstat-no" title="statement not covered" >description.trim();</span>
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (trimmed.length === 0) {
+<span class="cstat-no" title="statement not covered" >  if (trimmed.length === 0) {</span>
 <span class="cstat-no" title="statement not covered" >    return errors;</span>
   }
 &nbsp;
   // Check starts with uppercase
-  if (!/^[A-Z]/.test(trimmed)) {
-    errors.push({
+<span class="cstat-no" title="statement not covered" >  if (!/^[A-Z]/.test(trimmed)) {</span>
+<span class="cstat-no" title="statement not covered" >    errors.push({</span>
       message: `Description must begin with a capital letter. Found: "${trimmed.substring(0, 30)}..."`,
       path: [...context.path, "description"],
     });
   }
 &nbsp;
   // Check ends with period
-  if (!/\.\s*$/.test(trimmed)) {
-    errors.push({
+<span class="cstat-no" title="statement not covered" >  if (!/\.\s*$/.test(trimmed)) {</span>
+<span class="cstat-no" title="statement not covered" >    errors.push({</span>
       message: `Description must end with a period. Found: "...${trimmed.substring(Math.max(0, trimmed.length - 30))}"`,
       path: [...context.path, "description"],
     });
   }
 &nbsp;
-  return errors;
+<span class="cstat-no" title="statement not covered" >  return errors;</span>
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -211,7 +211,7 @@ module.exports = (given, _options, context) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-22T17:58:25.280Z
+                at 2026-07-21T21:53:15.439Z
             </div>
         <script src="prettify.js"></script>
         <script>
