@@ -155,13 +155,8 @@ rules:
       field: "description"
       function: truthy
 
-  # ---------------------------------------------------------------------------
-  # AAR040 - DefinedChannelServers
-  # Channel server must be defined in the servers object.
-  # Severity: warn (MAJOR / BUG)
-  # ---------------------------------------------------------------------------
   asa:AAR040:
-    description: "Channel server must be defined in the servers object."
+    description: "Any server referenced by a channel must be defined in the root 'servers' object."
     message: "AAR040: {{error}}"
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar040"
     severity: warn
@@ -293,7 +288,7 @@ rules:
   # Severity: warn (MAJOR / BUG)
   # ---------------------------------------------------------------------------
   asa:AAR019:
-    description: "Specify a unique identifier for the AsyncAPI document."
+    description: "The AsyncAPI document should define an 'id' field."
     message: "AAR019: The AsyncAPI document should define an 'id' field."
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar019"
     severity: warn

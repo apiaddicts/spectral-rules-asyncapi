@@ -94,7 +94,7 @@ spectral lint your-asyncapi.yaml
 | **AAR015** | `warn` | The `info` object must contain a `contact` section. |
 | **AAR016** | `warn` | Contact must include `name`, `url`, and `email` fields. |
 | **AAR017** | `warn` | The `license` object must have a `url` field. |
-| **AAR019** | `warn` | The AsyncAPI document should define a unique `id` field. |
+| **AAR019** | `warn` | The AsyncAPI document should define an `id` field. |
 | **AAR021** | `warn` | Each operation must have a `summary` field. |
 | **AAR022** | `warn` | Operation `description` must differ from its `summary`. |
 | **AAR029** | `warn` | Each channel and operation must have a `description`. |
