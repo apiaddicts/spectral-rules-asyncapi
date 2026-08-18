@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for asa-binding-version.js</title>
+    <title>Code coverage report for asa-avro-record-name-camel-case.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> asa-binding-version.js</h1>
+        <h1><a href="index.html">All files</a> asa-avro-record-name-camel-case.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/8</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/8</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -98,48 +98,48 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">44x</span>
+<span class="cline-any cline-yes">44x</span>
+<span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
- * AAR037 - BindingVersion
- * Validates that all bindings specify a bindingVersion.
- *
- * @param {object} given - The binding object
+ * @param {object} record - An object anywhere in the document with `type === 'record'`
  * @param {object} _options - Unused options
  * @param {import('@stoplight/spectral-core').RulesetFunctionContext} context
  * @returns {Array} Array of error objects
  */
-module.exports = <span class="fstat-no" title="function not covered" >(g</span>iven, _options, context) =&gt; {
-  const errors = <span class="cstat-no" title="statement not covered" >[];</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (!given || typeof given !== "object") {</span>
-<span class="cstat-no" title="statement not covered" >    return errors;</span>
+// Bounded quantifiers (mirrors the Java-side fix for a SonarCloud "regex repetition can lead
+// to a stack overflow" finding) so both engines reject/accept the exact same strings, including
+// pathologically long ones - an unbounded outer * on a group whose content is itself unbounded
+// would otherwise let one engine time out/overflow while the other fails fast.
+const CAMEL_CASE_PATTERN = /^[A-Z][a-z0-9]{1,62}(?:[A-Z][a-z0-9]{0,62}){0,20}$/;
+&nbsp;
+module.exports = (record, _options, context) =&gt; {
+  const name = record &amp;&amp; record.name;
+  if (typeof name !== "string" || CAMEL_CASE_PATTERN.test(name)) {
+    return [];
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (!given.bindingVersion) {</span>
-    const bindingName = <span class="cstat-no" title="statement not covered" >context.path[context.path.length - 1] || "unknown";</span>
-<span class="cstat-no" title="statement not covered" >    errors.push({</span>
-      message: `Binding '${bindingName}' must specify a 'bindingVersion' field.`,
-      path: [...context.path, "bindingVersion"],
-    });
-  }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  return errors;</span>
+  return [
+    {
+      message: `Avro record name '${name}' must be in CamelCase with an uppercase first letter (e.g. SolicitudComunicacion, ResultadoComunicacionMail).`,
+      path: [...context.path, "name"],
+    },
+  ];
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -148,7 +148,7 @@ module.exports = <span class="fstat-no" title="function not covered" >(g</span>i
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-21T21:53:15.439Z
+                at 2026-07-30T17:10:12.735Z
             </div>
         <script src="prettify.js"></script>
         <script>

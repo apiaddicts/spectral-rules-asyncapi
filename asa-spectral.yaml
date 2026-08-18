@@ -25,6 +25,9 @@ functions:
   - asa-channel-servers-defined
   - asa-binding-version
   - asa-message-schemas-in-components
+  - asa-avro-record-name-camel-case
+  - asa-error-topic-documented
+  - asa-avro-schema-format
   - asa-x-payload-references-well-formed
   - asa-retry-topic-naming-convention
   - asa-classification-valid-values
@@ -600,6 +603,24 @@ rules:
     then:
       function: asa-x-payload-references-well-formed
 
+  asa:AAR056:
+    description: "When the payload uses Avro (schemaFormat contains 'application/vnd.apache.avro'), schemaFormat must be exactly 'application/vnd.apache.avro;version=1.9.0', the standard version used across the style guide examples."
+    message: "AAR056: {{error}}"
+    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar056"
+    severity: error
+    given: "$..schemaFormat"
+    then:
+      function: asa-avro-schema-format
+
+  asa:AAR057:
+    description: "At least one channel must be documented as an error topic following the pattern '<topicOriginal>.[<consumerGroup>.]error.<n>' (e.g. 'beca.cmd.alumnos.solicitud.beca.grupo1.error.1'), required by Spring for error-topic routing. The consumer group is part of the name only when there is more than one consumer."
+    message: "AAR057: {{error}}"
+    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar057"
+    severity: error
+    given: "$"
+    then:
+      function: asa-error-topic-documented
+
   asa:AAR058:
     description: "If a channel name contains '.retry.', it must follow the pattern '<topicOriginal>.<consumerGroup>.retry.<n>' (e.g. 'beca.cmd.alumnos.solicitud.beca.grupo1.retry.1'), required by Spring for automatic retry reprocessing."
     message: "AAR058: {{error}}"
@@ -608,3 +629,13 @@ rules:
     given: "$.channels[*]"
     then:
       function: asa-retry-topic-naming-convention
+
+  asa:AAR059:
+    description: "The 'name' field of every Avro record (including records nested inside fields[].type, unions, arrays and maps) must be in CamelCase with an uppercase first letter (e.g. SolicitudComunicacion, ResultadoComunicacionMail)."
+    message: "AAR059: {{error}}"
+    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar059"
+    severity: error
+    resolved: false
+    given: "$..[?(@ && @.type=='record')]"
+    then:
+      function: asa-avro-record-name-camel-case

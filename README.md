@@ -81,6 +81,7 @@ spectral lint your-asyncapi.yaml
 | **AAR041** | `info` | Servers and channels should be defined in `components` for reusability. |
 | **AAR053** | `error` | Channel/topic name must follow the corporate naming pattern `<cod_poaps>.<classification>.<domain>.<origin>.<scope>[.<version>]`. |
 | **AAR054** | `error` | Channel/topic classification (2nd segment) must be `cdc`, `cmd` or `sys`. |
+| **AAR057** | `error` | At least one channel must be documented as an error topic following `<topicOriginal>.[<consumerGroup>.]error.<n>`. |
 | **AAR058** | `warn` | If a channel name contains `.retry.`, it must follow `<topicOriginal>.<consumerGroup>.retry.<n>`. |
 
 ### Format / Documentation Rules
@@ -116,6 +117,8 @@ spectral lint your-asyncapi.yaml
 | **AAR031** | `warn` | Message examples must follow the declared payload and headers schemas. |
 | **AAR052** | `error` | The namespace of a named Avro schema (record, enum or fixed) is required and must follow the corporate pattern. |
 | **AAR055** | `warn` | The `x-payload-references` extension, wherever it appears, must have `subject`, `ref` and `referenceName` on every item. |
+| **AAR056** | `error` | When the payload uses Avro, `schemaFormat` must be exactly `application/vnd.apache.avro;version=1.9.0`. |
+| **AAR059** | `error` | The `name` field of every Avro record (including nested records) must be in CamelCase with an uppercase first letter. |
 
 ---
 
@@ -148,7 +151,10 @@ The ruleset includes 12 custom Spectral functions for complex validation logic:
 | `asa-channel-naming-convention` | AAR053 | Validates channel/topic name against the corporate topic naming pattern |
 | `asa-classification-valid-values` | AAR054 | Validates that the channel/topic classification segment is cdc, cmd or sys |
 | `asa-x-payload-references-well-formed` | AAR055 | Validates that x-payload-references items each have subject, ref and referenceName |
+| `asa-avro-schema-format` | AAR056 | Validates that an Avro schemaFormat is exactly application/vnd.apache.avro;version=1.9.0 |
+| `asa-error-topic-documented` | AAR057 | Validates that at least one channel is documented as an error topic |
 | `asa-retry-topic-naming-convention` | AAR058 | Validates that retry channels follow the required retry-topic naming pattern |
+| `asa-avro-record-name-camel-case` | AAR059 | Validates that every Avro record's `name` (including nested records) is in CamelCase |
 
 ---
 
@@ -168,6 +174,10 @@ apiaddicts-asyncapi-style-guide-spectral/
 │   ├── asa-message-examples-validation.js
 │   ├── asa-message-schemas-in-components.js
 │   ├── asa-numeric-parameter-integrity.js
+│   ├── asa-string-parameter-integrity.js
+│   ├── asa-avro-record-name-camel-case.js
+│   ├── asa-error-topic-documented.js
+│   ├── asa-avro-schema-format.js
 │   ├── asa-string-parameter-integrity.js
 │   ├── asa-classification-valid-values.js
 │   ├── asa-x-payload-references-well-formed.js
@@ -243,7 +253,10 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR053 | `asa:AAR053` | BUG | MAJOR |
 | AAR054 | `asa:AAR054` | BUG | MAJOR |
 | AAR055 | `asa:AAR055` | BUG | MAJOR |
+| AAR056 | `asa:AAR056` | BUG | MAJOR |
+| AAR057 | `asa:AAR057` | BUG | MAJOR |
 | AAR058 | `asa:AAR058` | BUG | MINOR |
+| AAR059 | `asa:AAR059` | BUG | MAJOR |
 
 ---
 
