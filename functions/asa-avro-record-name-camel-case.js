@@ -9,7 +9,10 @@ const CAMEL_CASE_PATTERN = /^[A-Z][a-z0-9]{1,62}(?:[A-Z][a-z0-9]{0,62}){0,20}$/;
 
 module.exports = (record, _options, context) => {
   const name = record && record.name;
-  if (typeof name !== "string" || CAMEL_CASE_PATTERN.test(name)) {
+  if (name === undefined || name === null) {
+    return [];
+  }
+  if (typeof name === "string" && CAMEL_CASE_PATTERN.test(name)) {
     return [];
   }
 
