@@ -25,6 +25,7 @@ functions:
   - asa-channel-servers-defined
   - asa-binding-version
   - asa-message-schemas-in-components
+  - asa-avro-record-name-camel-case
   - asa-error-topic-documented
   - asa-avro-schema-format
   - asa-x-payload-references-well-formed
@@ -620,3 +621,13 @@ rules:
     given: "$.channels[*]"
     then:
       function: asa-retry-topic-naming-convention
+
+  asa:AAR059:
+    description: "The 'name' field of every Avro record (including records nested inside fields[].type, unions, arrays and maps) must be in CamelCase with an uppercase first letter (e.g. SolicitudComunicacion, ResultadoComunicacionMail)."
+    message: "AAR059: {{error}}"
+    documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar059"
+    severity: error
+    resolved: false
+    given: "$..[?(@ && @.type=='record')]"
+    then:
+      function: asa-avro-record-name-camel-case

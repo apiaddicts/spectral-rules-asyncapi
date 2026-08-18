@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AAR056 - AvroSchemaFormat: When the payload uses Avro, `schemaFormat` must be exactly `application/vnd.apache.avro;version=1.9.0`.
 - AAR057 - ErrorTopicDocumented: At least one channel must be documented as an error topic following `<topicOriginal>.[<consumerGroup>.]error.<n>`.
 - AAR058 - RetryTopicNamingConvention: If a channel name contains `.retry.`, it must follow `<topicOriginal>.<consumerGroup>.retry.<n>`.
+- AAR059 - AvroRecordNameCamelCase: The `name` field of every Avro record (including records nested inside `fields[].type`, unions, arrays and maps) must be in CamelCase with an uppercase first letter.
 
 ## [1.0.0] - 2025-12-29
 
