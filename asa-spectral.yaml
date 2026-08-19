@@ -33,6 +33,7 @@ functions:
   - asa-classification-valid-values
   - asa-channel-naming-convention
   - asa-avro-namespace-pattern
+  - asa-numeric-format
 extends: ["spectral:asyncapi"]
 rules:
   # ===========================================================================
@@ -45,7 +46,7 @@ rules:
   # Severity: error (CRITICAL / VULNERABILITY in SonarQube)
   # ---------------------------------------------------------------------------
   asa:AAR001:
-    description: "HTTPS protocol is mandatory."
+    description: "Servers must use a secure protocol."
     message: "AAR001: Server must use a secure protocol (https, wss, amqps, etc). Found '{{value}}'."
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar001"
     severity: error
@@ -154,13 +155,8 @@ rules:
       field: "description"
       function: truthy
 
-  # ---------------------------------------------------------------------------
-  # AAR040 - DefinedChannelServers
-  # Channel server must be defined in the servers object.
-  # Severity: warn (MAJOR / BUG)
-  # ---------------------------------------------------------------------------
   asa:AAR040:
-    description: "Channel server must be defined in the servers object."
+    description: "Any server referenced by a channel must be defined in the root 'servers' object."
     message: "AAR040: {{error}}"
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar040"
     severity: warn
@@ -210,7 +206,7 @@ rules:
   # Severity: warn (MAJOR / BUG)
   # ---------------------------------------------------------------------------
   asa:AAR012:
-    description: "Each operation should have a unique operationId."
+    description: "Each operation should declare an operationId."
     message: "AAR012: Operation must declare an 'operationId'."
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar012"
     severity: warn
@@ -292,7 +288,7 @@ rules:
   # Severity: warn (MAJOR / BUG)
   # ---------------------------------------------------------------------------
   asa:AAR019:
-    description: "Specify a unique identifier for the AsyncAPI document."
+    description: "The AsyncAPI document should define an 'id' field."
     message: "AAR019: The AsyncAPI document should define an 'id' field."
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar019"
     severity: warn
@@ -408,13 +404,16 @@ rules:
   # Severity: warn (MAJOR / BUG)
   # ---------------------------------------------------------------------------
   asa:AAR032:
-    description: "Numeric parameters should have minimum, maximum, or format restriction."
+    description: "Numeric properties should declare a value restriction (minimum, maximum, format, enum or const)."
     message: "AAR032: {{error}}"
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar032"
     severity: warn
     given:
       - "$.components.schemas[*]..properties[*]"
+      - "$.components.messages[*].payload..properties[*]"
       - "$.channels[*][publish,subscribe].message.payload..properties[*]"
+      - "$.channels[*].messages[*].payload..properties[*]"
+    resolved: false
     then:
       function: asa-numeric-parameter-integrity
 
@@ -424,13 +423,16 @@ rules:
   # Severity: warn (MAJOR / BUG)
   # ---------------------------------------------------------------------------
   asa:AAR033:
-    description: "String parameters should have minLength, maxLength, pattern, or enum restriction."
+    description: "String properties should declare a value restriction (minLength, maxLength, pattern, enum, const or format)."
     message: "AAR033: {{error}}"
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar033"
     severity: warn
     given:
       - "$.components.schemas[*]..properties[*]"
+      - "$.components.messages[*].payload..properties[*]"
       - "$.channels[*][publish,subscribe].message.payload..properties[*]"
+      - "$.channels[*].messages[*].payload..properties[*]"
+    resolved: false
     then:
       function: asa-string-parameter-integrity
 
@@ -441,16 +443,17 @@ rules:
   # ---------------------------------------------------------------------------
   asa:AAR034:
     description: "Numeric types require a valid format (int32, int64, float, double)."
-    message: "AAR034: Numeric property must specify a valid 'format' (int32, int64, float, double)."
+    message: "AAR034: {{error}}"
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar034"
     severity: warn
     given:
-      - "$.components.schemas[*]..properties[*][?(@.type === 'integer' || @.type === 'number')]"
+      - "$.components.schemas[*]..properties[*]"
+      - "$.components.messages[*].payload..properties[*]"
+      - "$.channels[*][publish,subscribe].message.payload..properties[*]"
+      - "$.channels[*].messages[*].payload..properties[*]"
+    resolved: false
     then:
-      field: "format"
-      function: pattern
-      functionOptions:
-        match: "^(int32|int64|float|double)$"
+      function: asa-numeric-format
 
   # ---------------------------------------------------------------------------
   # AAR035 - MessageTitle

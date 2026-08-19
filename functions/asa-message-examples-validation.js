@@ -1,8 +1,4 @@
 /**
- * AAR024 / AAR031 - MessageValidation / MessageExamples
- * Validates that message examples are present and structurally consistent
- * with the declared payload schema.
- *
  * @param {object} given - The message object
  * @param {object} _options - Unused options
  * @param {import('@stoplight/spectral-core').RulesetFunctionContext} context
@@ -15,7 +11,6 @@ module.exports = (given, _options, context) => {
     return errors;
   }
 
-  // Handle oneOf messages
   if (given.oneOf && Array.isArray(given.oneOf)) {
     given.oneOf.forEach((msg, idx) => {
       const msgErrors = validateMessage(msg, [...context.path, "oneOf", idx]);

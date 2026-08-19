@@ -66,7 +66,7 @@ spectral lint your-asyncapi.yaml
 
 | Rule | Severity | Description |
 |------|----------|-------------|
-| **AAR001** | `error` | HTTPS protocol (or equivalent secure protocol) is mandatory for all servers. |
+| **AAR001** | `error` | A secure protocol (https, wss, amqps, etc.) is mandatory for all servers. |
 | **AAR008** | `error` | The `servers` section must be defined in the AsyncAPI document. |
 | **AAR018** | `warn` | Security schemes must be among allowed types and must be complete (all required fields). |
 | **AAR043** | `warn` | Each channel operation should define a security scheme. |
@@ -94,12 +94,12 @@ spectral lint your-asyncapi.yaml
 | **AAR015** | `warn` | The `info` object must contain a `contact` section. |
 | **AAR016** | `warn` | Contact must include `name`, `url`, and `email` fields. |
 | **AAR017** | `warn` | The `license` object must have a `url` field. |
-| **AAR019** | `warn` | The AsyncAPI document should define a unique `id` field. |
+| **AAR019** | `warn` | The AsyncAPI document should define an `id` field. |
 | **AAR021** | `warn` | Each operation must have a `summary` field. |
 | **AAR022** | `warn` | Operation `description` must differ from its `summary`. |
 | **AAR029** | `warn` | Each channel and operation must have a `description`. |
-| **AAR032** | `warn` | Numeric properties must have `minimum`, `maximum`, or `format` restrictions. |
-| **AAR033** | `warn` | String properties must have `minLength`, `maxLength`, `pattern`, or `enum` restrictions. |
+| **AAR032** | `warn` | Numeric properties must declare a value restriction (`minimum`, `maximum`, `format`, `enum` or `const`). |
+| **AAR033** | `warn` | String properties must declare a value restriction (`minLength`, `maxLength`, `pattern`, `enum`, `const` or `format`). |
 | **AAR034** | `warn` | Numeric types must specify a valid `format` (int32, int64, float, double). |
 | **AAR035** | `info` | Messages should have a `title` field. |
 | **AAR036** | `warn` | Descriptions must begin with a capital letter and end with a period. |
@@ -148,7 +148,7 @@ The ruleset includes 12 custom Spectral functions for complex validation logic:
 | `asa-binding-version` | AAR037 | Checks bindings have bindingVersion |
 | `asa-message-schemas-in-components` | AAR026 | Recommends $ref usage for message schemas |
 | `asa-avro-namespace-pattern` | AAR052 | Validates Avro namespace against the corporate pattern |
-| `asa-channel-naming-convention` | AAR053 | Validates channel/topic name against the corporate Kafka-topic naming pattern |
+| `asa-channel-naming-convention` | AAR053 | Validates channel/topic name against the corporate topic naming pattern |
 | `asa-classification-valid-values` | AAR054 | Validates that the channel/topic classification segment is cdc, cmd or sys |
 | `asa-x-payload-references-well-formed` | AAR055 | Validates that x-payload-references items each have subject, ref and referenceName |
 | `asa-avro-schema-format` | AAR056 | Validates that an Avro schemaFormat is exactly application/vnd.apache.avro;version=1.9.0 |
