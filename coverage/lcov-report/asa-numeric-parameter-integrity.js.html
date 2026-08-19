@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.25% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/16</span>
+                <span class='fraction'>14/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">91.3% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/23</span>
+                <span class='fraction'>21/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.25% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/16</span>
+                <span class='fraction'>14/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -115,39 +115,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">34x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * AAR032 - NumericParameterIntegrity
@@ -158,39 +158,39 @@
  * @param {import('@stoplight/spectral-core').RulesetFunctionContext} context
  * @returns {Array} Array of error objects
  */
-module.exports = <span class="fstat-no" title="function not covered" >(g</span>iven, _options, context) =&gt; {
-  const errors = <span class="cstat-no" title="statement not covered" >[];</span>
+module.exports = (given, _options, context) =&gt; {
+  const errors = [];
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (!given || typeof given !== "object") {</span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (!given || typeof given !== "object") {
 <span class="cstat-no" title="statement not covered" >    return errors;</span>
   }
 &nbsp;
   // Only check numeric types
-<span class="cstat-no" title="statement not covered" >  if (given.type !== "integer" &amp;&amp; given.type !== "number") {</span>
-<span class="cstat-no" title="statement not covered" >    return errors;</span>
+  if (given.type !== "integer" &amp;&amp; given.type !== "number") {
+    return errors;
   }
 &nbsp;
   // Skip if it's a $ref
-<span class="cstat-no" title="statement not covered" >  if (given.$ref) {</span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (given.$ref) {
 <span class="cstat-no" title="statement not covered" >    return errors;</span>
   }
 &nbsp;
   const hasMinimum =
-<span class="cstat-no" title="statement not covered" >    given.minimum !== undefined || given.exclusiveMinimum !== undefined;</span>
+    given.minimum !== undefined || given.exclusiveMinimum !== undefined;
   const hasMaximum =
-<span class="cstat-no" title="statement not covered" >    given.maximum !== undefined || given.exclusiveMaximum !== undefined;</span>
-  const hasFormat = <span class="cstat-no" title="statement not covered" >!!given.format;</span>
-  const hasEnum = <span class="cstat-no" title="statement not covered" >Array.isArray(given.enum) &amp;&amp; given.enum.length &gt; 0;</span>
-  const hasConst = <span class="cstat-no" title="statement not covered" >given.const !== undefined;</span>
+    given.maximum !== undefined || given.exclusiveMaximum !== undefined;
+  const hasFormat = !!given.format;
+  const hasEnum = Array.isArray(given.enum) &amp;&amp; given.enum.length &gt; 0;
+  const hasConst = given.const !== undefined;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (!hasMinimum &amp;&amp; !hasMaximum &amp;&amp; !hasFormat &amp;&amp; !hasEnum &amp;&amp; !hasConst) {</span>
-<span class="cstat-no" title="statement not covered" >    errors.push({</span>
+  if (!hasMinimum &amp;&amp; !hasMaximum &amp;&amp; !hasFormat &amp;&amp; !hasEnum &amp;&amp; !hasConst) {
+    errors.push({
       message: `Numeric property of type '${given.type}' should have at least one of: minimum, maximum, format, enum, or const restriction.`,
       path: context.path,
     });
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return errors;</span>
+  return errors;
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -199,7 +199,7 @@ module.exports = <span class="fstat-no" title="function not covered" >(g</span>i
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-04-30T19:48:21.432Z
+                at 2026-08-18T16:10:42.963Z
             </div>
         <script src="prettify.js"></script>
         <script>
