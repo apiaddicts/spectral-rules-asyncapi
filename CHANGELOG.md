@@ -20,6 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 
+## [1.1.0-beta.2] - 2026-08-19
+
+### Added
+
+- AAR060 - ContentTypeAvro: A message's `contentType` (and the document-level `defaultContentType`) must match `application/*+avro` so Confluent's KafkaAvroDeserializer can deserialize the payload.
+
 ## [1.1.0-beta.1] - 2026-07-15
 
 ### Added

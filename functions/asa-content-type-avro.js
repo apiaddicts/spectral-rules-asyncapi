@@ -13,6 +13,9 @@ module.exports = (document, _options, context) => {
     return errors;
   }
 
+  const isV3 =
+    typeof document.asyncapi === "string" && document.asyncapi.startsWith("3.");
+
   const check = (value, path) => {
     if (value === null || value === undefined) return;
     if (typeof value !== "string" || !AVRO_CONTENT_TYPE.test(value)) {
@@ -31,7 +34,7 @@ module.exports = (document, _options, context) => {
     if (!message || typeof message !== "object" || message.$ref) {
       return;
     }
-    if (Array.isArray(message.oneOf)) {
+    if (!isV3 && Array.isArray(message.oneOf)) {
       message.oneOf.forEach((member, index) =>
         checkMessage(member, [...basePath, "oneOf", index])
       );
@@ -44,8 +47,6 @@ module.exports = (document, _options, context) => {
 
   const channels = document.channels;
   if (channels && typeof channels === "object") {
-    const isV3 =
-      typeof document.asyncapi === "string" && document.asyncapi.startsWith("3.");
     for (const [channelName, channel] of Object.entries(channels)) {
       if (!channel || typeof channel !== "object") continue;
       if (isV3) {
