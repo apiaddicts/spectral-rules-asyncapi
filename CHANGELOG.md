@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [1.1.0-beta-2] - 2026-08-19
+
+### Added
+
+- AAR061 - ProcessorFunctionNamePaired: Every `x-scs-function-name` must be paired one-to-one between a producing (`publish`/`send`) and a consuming (`subscribe`/`receive`) operation, so the JAPI generator links them into a single processor.
+
 ## [1.1.0-beta-1] - 2026-07-15
 
 ### Added

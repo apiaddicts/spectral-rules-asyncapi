@@ -8,11 +8,14 @@ module.exports = {
     "a-in": {
       publish: { operationId: "consumeA", "x-scs-function-name": "processAtoB" },
     },
+    "a-in-again": {
+      publish: { operationId: "consumeAagain", "x-scs-function-name": "processAtoB" },
+    },
     "b-out": {
       subscribe: { operationId: "produceB", "x-scs-function-name": "processAtoB" },
     },
-    "a-in-again": {
-      publish: { operationId: "consumeAagain", "x-scs-function-name": "processAtoB" },
+    "b-out-again": {
+      subscribe: { operationId: "produceBagain", "x-scs-function-name": "processAtoB" },
     },
     "c-in": {
       publish: { operationId: "consumeC", "x-scs-function-name": "processCtoD" },

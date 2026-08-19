@@ -15,7 +15,7 @@ module.exports = (document, _options, context) => {
 
   const groups = new Map();
 
-  const record = (operation, isProduce, basePath) => {
+  const recordOperation = (operation, isProduce, basePath) => {
     if (!operation || typeof operation !== "object" || operation.$ref) return;
     if (!Object.prototype.hasOwnProperty.call(operation, FUNCTION_NAME)) return;
     const rawValue = operation[FUNCTION_NAME];
@@ -25,15 +25,15 @@ module.exports = (document, _options, context) => {
 
     let group = groups.get(value);
     if (!group) {
-      group = { hasProduce: false, hasConsume: false, nodes: [] };
+      group = { produceNodes: [], consumeNodes: [] };
       groups.set(value, group);
     }
+    const nodePath = [...basePath, FUNCTION_NAME];
     if (isProduce) {
-      group.hasProduce = true;
+      group.produceNodes.push(nodePath);
     } else {
-      group.hasConsume = true;
+      group.consumeNodes.push(nodePath);
     }
-    group.nodes.push([...basePath, FUNCTION_NAME]);
   };
 
   const isV3 =
@@ -46,9 +46,9 @@ module.exports = (document, _options, context) => {
         if (!operation || typeof operation !== "object") continue;
         const action = operation.action;
         if (action === "send") {
-          record(operation, true, ["operations", operationName]);
+          recordOperation(operation, true, ["operations", operationName]);
         } else if (action === "receive") {
-          record(operation, false, ["operations", operationName]);
+          recordOperation(operation, false, ["operations", operationName]);
         }
       }
     }
@@ -57,20 +57,25 @@ module.exports = (document, _options, context) => {
     if (channels && typeof channels === "object") {
       for (const [channelName, channel] of Object.entries(channels)) {
         if (!channel || typeof channel !== "object") continue;
-        record(channel.publish, true, ["channels", channelName, "publish"]);
-        record(channel.subscribe, false, ["channels", channelName, "subscribe"]);
+        recordOperation(channel.publish, true, ["channels", channelName, "publish"]);
+        recordOperation(channel.subscribe, false, ["channels", channelName, "subscribe"]);
       }
     }
   }
 
   for (const [value, group] of groups) {
-    if (!group.hasProduce || !group.hasConsume) {
-      for (const path of group.nodes) {
-        errors.push({
-          message: `The x-scs-function-name '${value}' must be shared by both a publish/send and a subscribe/receive operation.`,
-          path: [...context.path, ...path],
-        });
-      }
+    const paired = Math.min(group.produceNodes.length, group.consumeNodes.length);
+    let unpaired = [];
+    if (group.produceNodes.length > group.consumeNodes.length) {
+      unpaired = group.produceNodes.slice(paired);
+    } else if (group.consumeNodes.length > group.produceNodes.length) {
+      unpaired = group.consumeNodes.slice(paired);
+    }
+    for (const nodePath of unpaired) {
+      errors.push({
+        message: `The x-scs-function-name '${value}' must be paired one-to-one between a publish/send and a subscribe/receive operation.`,
+        path: [...context.path, ...nodePath],
+      });
     }
   }
 
