@@ -1,5 +1,8 @@
 const { linterForRule } = require("../../helpers/utils");
 const failExample = require("./AAR063/fail-example");
+const failNonString = require("./AAR063/fail-non-string");
+const okMissing = require("./AAR063/ok-missing");
+const okEmpty = require("./AAR063/ok-empty");
 
 describe("AAR063: asyncapi version must be one of the allowed versions (AsyncAPI 3.x)", () => {
   let linter;
@@ -17,6 +20,39 @@ describe("AAR063: asyncapi version must be one of the allowed versions (AsyncAPI
   test("Should pass for the same 3.0.0 document once allowedVersions includes 3.0.0", async () => {
     const configuredLinter = await linterForRule("asa:AAR063", {
       functionOptions: { allowedVersions: "2.6.0,3.0.0" },
+    });
+    const results = await configuredLinter.run(failExample);
+    expect(results.length).toBe(0);
+  });
+
+  test("Should not report when the asyncapi field is missing", async () => {
+    const results = await linter.run(okMissing);
+    expect(results.length).toBe(0);
+  });
+
+  test("Should not report when the asyncapi field is empty", async () => {
+    const results = await linter.run(okEmpty);
+    expect(results.length).toBe(0);
+  });
+
+  test("Should report when the asyncapi value is a non-string (number)", async () => {
+    const results = await linter.run(failNonString);
+    expect(results.length).toBe(1);
+    results.forEach((r) => expect(r.code).toBe("asa:AAR063"));
+  });
+
+  test("Should report with the expected message and path", async () => {
+    const results = await linter.run(failExample);
+    expect(results.length).toBe(1);
+    expect(results[0].message).toBe(
+      "AAR063: The asyncapi version must be one of the versions allowed by the organization"
+    );
+    expect(results[0].path).toEqual(["asyncapi"]);
+  });
+
+  test("Should trim spaces and drop empty entries in allowedVersions", async () => {
+    const configuredLinter = await linterForRule("asa:AAR063", {
+      functionOptions: { allowedVersions: "2.6.0, ,3.0.0" },
     });
     const results = await configuredLinter.run(failExample);
     expect(results.length).toBe(0);
