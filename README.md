@@ -112,7 +112,7 @@ spectral lint your-asyncapi.yaml
 
 | Rule | Severity | Description |
 |------|----------|-------------|
-| **AAR024** | `warn` | Messages must comply with the payload schema (examples validated). |
+| **AAR024** | `error` | Every message must declare a `contentType` unless it is an Avro message (auto-detected via `schemaFormat`). |
 | **AAR026** | `info` | Message schemas should be defined in `components.messages` and referenced via `$ref`. |
 | **AAR031** | `warn` | Message examples must follow the declared payload and headers schemas. |
 | **AAR052** | `error` | The namespace of a named Avro schema (record, enum or fixed) is required and must follow the corporate pattern. |
@@ -141,7 +141,8 @@ The ruleset includes 12 custom Spectral functions for complex validation logic:
 | `asa-description-format` | AAR036 | Checks description starts uppercase, ends with period |
 | `asa-duplicate-operation-id` | AAR013 | Detects duplicate operationId values across channels |
 | `asa-operation-id-camel-case` | AAR051 | Checks operationId is present and follows camelCase |
-| `asa-message-examples-validation` | AAR024, AAR031 | Validates message examples against schemas |
+| `asa-message-content-type` | AAR024 | Validates each message declares a contentType unless it is Avro |
+| `asa-message-examples-validation` | AAR031 | Validates message examples against schemas |
 | `asa-numeric-parameter-integrity` | AAR032 | Checks numeric properties have constraints |
 | `asa-string-parameter-integrity` | AAR033 | Checks string properties have constraints |
 | `asa-channel-servers-defined` | AAR040 | Validates channel server references exist |
