@@ -66,7 +66,7 @@ spectral lint your-asyncapi.yaml
 
 | Rule | Severity | Description |
 |------|----------|-------------|
-| **AAR001** | `error` | HTTPS protocol (or equivalent secure protocol) is mandatory for all servers. |
+| **AAR001** | `error` | A secure protocol (https, wss, amqps, etc.) is mandatory for all servers. |
 | **AAR008** | `error` | The `servers` section must be defined in the AsyncAPI document. |
 | **AAR018** | `warn` | Security schemes must be among allowed types and must be complete (all required fields). |
 | **AAR043** | `warn` | Each channel operation should define a security scheme. |
@@ -79,6 +79,10 @@ spectral lint your-asyncapi.yaml
 | **AAR010** | `warn` | All tags should have a `description` field. |
 | **AAR040** | `warn` | Channel servers must reference servers defined in the root `servers` object. |
 | **AAR041** | `info` | Servers and channels should be defined in `components` for reusability. |
+| **AAR053** | `error` | Channel/topic name must follow the corporate naming pattern `<cod_poaps>.<classification>.<domain>.<origin>.<scope>[.<version>]`. |
+| **AAR054** | `error` | Channel/topic classification (2nd segment) must be `cdc`, `cmd` or `sys`. |
+| **AAR057** | `error` | At least one channel must be documented as an error topic following `<topicOriginal>.[<consumerGroup>.]error.<n>`. |
+| **AAR058** | `warn` | If a channel name contains `.retry.`, it must follow `<topicOriginal>.<consumerGroup>.retry.<n>`. |
 
 ### Format / Documentation Rules
 
@@ -90,18 +94,19 @@ spectral lint your-asyncapi.yaml
 | **AAR015** | `warn` | The `info` object must contain a `contact` section. |
 | **AAR016** | `warn` | Contact must include `name`, `url`, and `email` fields. |
 | **AAR017** | `warn` | The `license` object must have a `url` field. |
-| **AAR019** | `warn` | The AsyncAPI document should define a unique `id` field. |
+| **AAR019** | `warn` | The AsyncAPI document should define an `id` field. |
 | **AAR021** | `warn` | Each operation must have a `summary` field. |
 | **AAR022** | `warn` | Operation `description` must differ from its `summary`. |
 | **AAR029** | `warn` | Each channel and operation must have a `description`. |
-| **AAR032** | `warn` | Numeric properties must have `minimum`, `maximum`, or `format` restrictions. |
-| **AAR033** | `warn` | String properties must have `minLength`, `maxLength`, `pattern`, or `enum` restrictions. |
+| **AAR032** | `warn` | Numeric properties must declare a value restriction (`minimum`, `maximum`, `format`, `enum` or `const`). |
+| **AAR033** | `warn` | String properties must declare a value restriction (`minLength`, `maxLength`, `pattern`, `enum`, `const` or `format`). |
 | **AAR034** | `warn` | Numeric types must specify a valid `format` (int32, int64, float, double). |
 | **AAR035** | `info` | Messages should have a `title` field. |
 | **AAR036** | `warn` | Descriptions must begin with a capital letter and end with a period. |
 | **AAR037** | `warn` | Bindings must specify a `bindingVersion`. |
 | **AAR042** | `info` | Messages should have a unique `messageId` identifier. |
 | **AAR050** | `error` | The `info.title` field must exist and not be empty. |
+| **AAR051** | `error` | Every operation's `operationId` must be present and follow camelCase naming convention. |
 
 ### Schema Rules
 
@@ -110,6 +115,11 @@ spectral lint your-asyncapi.yaml
 | **AAR024** | `warn` | Messages must comply with the payload schema (examples validated). |
 | **AAR026** | `info` | Message schemas should be defined in `components.messages` and referenced via `$ref`. |
 | **AAR031** | `warn` | Message examples must follow the declared payload and headers schemas. |
+| **AAR052** | `error` | The namespace of a named Avro schema (record, enum or fixed) is required and must follow the corporate pattern. |
+| **AAR055** | `warn` | The `x-payload-references` extension, wherever it appears, must have `subject`, `ref` and `referenceName` on every item. |
+| **AAR056** | `error` | When the payload uses Avro, `schemaFormat` must be exactly `application/vnd.apache.avro;version=1.9.0`. |
+| **AAR059** | `error` | The `name` field of every Avro record (including nested records) must be in CamelCase with an uppercase first letter. |
+| **AAR060** | `error` | A message's `contentType` (and the document-level `defaultContentType`) must match `application/*+avro`. |
 
 ---
 
@@ -124,19 +134,29 @@ All rules support **AsyncAPI 2.x** by default. Rules that differ structurally fo
 
 ## Custom Functions
 
-The ruleset includes 9 custom Spectral functions for complex validation logic:
+The ruleset includes 12 custom Spectral functions for complex validation logic:
 
 | Function | Used by | Purpose |
 |----------|---------|---------|
 | `asa-check-security-schemes` | AAR018 | Validates security scheme types and completeness |
 | `asa-description-format` | AAR036 | Checks description starts uppercase, ends with period |
 | `asa-duplicate-operation-id` | AAR013 | Detects duplicate operationId values across channels |
+| `asa-operation-id-camel-case` | AAR051 | Checks operationId is present and follows camelCase |
 | `asa-message-examples-validation` | AAR024, AAR031 | Validates message examples against schemas |
 | `asa-numeric-parameter-integrity` | AAR032 | Checks numeric properties have constraints |
 | `asa-string-parameter-integrity` | AAR033 | Checks string properties have constraints |
 | `asa-channel-servers-defined` | AAR040 | Validates channel server references exist |
 | `asa-binding-version` | AAR037 | Checks bindings have bindingVersion |
 | `asa-message-schemas-in-components` | AAR026 | Recommends $ref usage for message schemas |
+| `asa-avro-namespace-pattern` | AAR052 | Validates Avro namespace against the corporate pattern |
+| `asa-channel-naming-convention` | AAR053 | Validates channel/topic name against the corporate topic naming pattern |
+| `asa-classification-valid-values` | AAR054 | Validates that the channel/topic classification segment is cdc, cmd or sys |
+| `asa-x-payload-references-well-formed` | AAR055 | Validates that x-payload-references items each have subject, ref and referenceName |
+| `asa-avro-schema-format` | AAR056 | Validates that an Avro schemaFormat is exactly application/vnd.apache.avro;version=1.9.0 |
+| `asa-error-topic-documented` | AAR057 | Validates that at least one channel is documented as an error topic |
+| `asa-retry-topic-naming-convention` | AAR058 | Validates that retry channels follow the required retry-topic naming pattern |
+| `asa-avro-record-name-camel-case` | AAR059 | Validates that every Avro record's `name` (including nested records) is in CamelCase |
+| `asa-content-type-avro` | AAR060 | Validates that every message `contentType` and the `defaultContentType` match `application/*+avro` |
 
 ---
 
@@ -146,7 +166,9 @@ The ruleset includes 9 custom Spectral functions for complex validation logic:
 apiaddicts-asyncapi-style-guide-spectral/
 ├── .github/workflows/       # CI/CD configuration
 ├── functions/               # Custom Spectral rule functions
+│   ├── asa-avro-namespace-pattern.js
 │   ├── asa-binding-version.js
+│   ├── asa-channel-naming-convention.js
 │   ├── asa-channel-servers-defined.js
 │   ├── asa-check-security-schemes.js
 │   ├── asa-description-format.js
@@ -154,7 +176,15 @@ apiaddicts-asyncapi-style-guide-spectral/
 │   ├── asa-message-examples-validation.js
 │   ├── asa-message-schemas-in-components.js
 │   ├── asa-numeric-parameter-integrity.js
-│   └── asa-string-parameter-integrity.js
+│   ├── asa-string-parameter-integrity.js
+│   ├── asa-content-type-avro.js
+│   ├── asa-avro-record-name-camel-case.js
+│   ├── asa-error-topic-documented.js
+│   ├── asa-avro-schema-format.js
+│   ├── asa-string-parameter-integrity.js
+│   ├── asa-classification-valid-values.js
+│   ├── asa-x-payload-references-well-formed.js
+│   └── asa-retry-topic-naming-convention.js
 ├── test/
 │   ├── helpers/utils.js     # Test utilities
 │   ├── asyncapi2/           # AsyncAPI 2.x tests
@@ -163,6 +193,9 @@ apiaddicts-asyncapi-style-guide-spectral/
 │   │   ├── format/          # Format/documentation tests
 │   │   └── schemas/         # Schema rule tests
 │   └── asyncapi3/           # AsyncAPI 3.x tests
+│       ├── operations/      # Operations rule tests
+│       ├── format/          # Format/documentation tests
+│       └── schemas/         # Schema rule tests
 ├── asa-spectral.yaml        # Main Spectral ruleset
 ├── package.json
 ├── CONTRIBUTING.md
@@ -218,6 +251,16 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR042 | `asa:AAR042` | BUG | MAJOR |
 | AAR043 | `asa:AAR043` | VULNERABILITY | MAJOR |
 | AAR050 | `asa:AAR050` | BUG | MAJOR |
+| AAR051 | `asa:AAR051` | BUG | MAJOR |
+| AAR052 | `asa:AAR052` | BUG | MAJOR |
+| AAR053 | `asa:AAR053` | BUG | MAJOR |
+| AAR054 | `asa:AAR054` | BUG | MAJOR |
+| AAR055 | `asa:AAR055` | BUG | MAJOR |
+| AAR056 | `asa:AAR056` | BUG | MAJOR |
+| AAR057 | `asa:AAR057` | BUG | MAJOR |
+| AAR058 | `asa:AAR058` | BUG | MINOR |
+| AAR059 | `asa:AAR059` | BUG | MAJOR |
+| AAR060 | `asa:AAR060` | BUG | MAJOR |
 
 ---
 
