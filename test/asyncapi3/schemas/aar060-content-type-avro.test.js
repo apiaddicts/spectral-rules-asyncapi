@@ -8,7 +8,10 @@ const failLengthBoundary = require("./AAR060/fail-length-boundary");
 const okNullContentType = require("./AAR060/ok-null-content-type");
 const okNoDefaultContentType = require("./AAR060/ok-no-default-content-type");
 const okGuard = require("./AAR060/ok-guard");
-const okOneof = require("./AAR060/ok-oneof");
+const failOneof = require("./AAR060/fail-oneof");
+const failTraitsContentType = require("./AAR060/fail-traits-content-type");
+const okTraitsContentType = require("./AAR060/ok-traits-content-type");
+const failReusableChannel = require("./AAR060/fail-reusable-channel");
 
 describe("AAR060: contentType must be application/*+avro (AsyncAPI 3.x)", () => {
   let linter;
@@ -70,8 +73,35 @@ describe("AAR060: contentType must be application/*+avro (AsyncAPI 3.x)", () => 
     expect(results.length).toBe(0);
   });
 
-  test("Should not descend a v3 message-level oneOf (matches Sonar; no issues)", async () => {
-    const results = await linter.run(okOneof);
+  test("Should descend a v3 message-level oneOf and flag each non-avro member", async () => {
+    const results = await linter.run(failOneof);
+    expect(results.length).toBe(1);
+    expectAllAAR060(results);
+  });
+
+  test("Should flag a contentType declared only in a message trait", async () => {
+    const results = await linter.run(failTraitsContentType);
+    expect(results.length).toBe(1);
+    expectAllAAR060(results);
+  });
+
+  test("Should pass when the trait contentType is valid or the message's own contentType overrides it", async () => {
+    const results = await linter.run(okTraitsContentType);
+    expect(results.length).toBe(0);
+  });
+
+  test("Should validate a message inside a reusable components channel referenced via $ref", async () => {
+    const results = await linter.run(failReusableChannel);
+    expect(results.length).toBe(1);
+    expectAllAAR060(results);
+  });
+
+  test("Should not crash when channels and components are entirely absent", async () => {
+    const results = await linter.run({
+      asyncapi: "3.0.0",
+      info: { version: "1.0.0", title: "No channels" },
+      defaultContentType: "application/vnd.apache.avro+avro",
+    });
     expect(results.length).toBe(0);
   });
 

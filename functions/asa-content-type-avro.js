@@ -13,8 +13,8 @@ module.exports = (document, _options, context) => {
     return errors;
   }
 
-  const isV3 =
-    typeof document.asyncapi === "string" && document.asyncapi.startsWith("3.");
+  const isObject = (value) => value !== null && typeof value === "object";
+  const has = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
 
   const check = (value, path) => {
     if (value === null || value === undefined) return;
@@ -26,57 +26,79 @@ module.exports = (document, _options, context) => {
     }
   };
 
-  if (Object.prototype.hasOwnProperty.call(document, "defaultContentType")) {
-    check(document.defaultContentType, ["defaultContentType"]);
-  }
+  const effectiveContentType = (message) => {
+    if (has(message, "contentType")) {
+      return { value: message.contentType, path: ["contentType"] };
+    }
+    if (Array.isArray(message.traits)) {
+      let effective = null;
+      message.traits.forEach((trait, index) => {
+        if (isObject(trait) && !trait.$ref && has(trait, "contentType")) {
+          effective = { value: trait.contentType, path: ["traits", index, "contentType"] };
+        }
+      });
+      return effective;
+    }
+    return null;
+  };
 
   const checkMessage = (message, basePath) => {
-    if (!message || typeof message !== "object" || message.$ref) {
+    if (!isObject(message) || message.$ref) {
       return;
     }
-    if (!isV3 && Array.isArray(message.oneOf)) {
+    if (Array.isArray(message.oneOf)) {
       message.oneOf.forEach((member, index) =>
         checkMessage(member, [...basePath, "oneOf", index])
       );
       return;
     }
-    if (Object.prototype.hasOwnProperty.call(message, "contentType")) {
-      check(message.contentType, [...basePath, "contentType"]);
+    const effective = effectiveContentType(message);
+    if (effective) {
+      check(effective.value, [...basePath, ...effective.path]);
     }
   };
 
-  const channels = document.channels;
-  if (channels && typeof channels === "object") {
-    for (const [channelName, channel] of Object.entries(channels)) {
-      if (!channel || typeof channel !== "object") continue;
-      if (isV3) {
-        const messages = channel.messages;
-        if (messages && typeof messages === "object") {
-          for (const [messageName, message] of Object.entries(messages)) {
-            checkMessage(message, ["channels", channelName, "messages", messageName]);
-          }
-        }
-      } else {
-        for (const operationName of ["publish", "subscribe"]) {
-          const operation = channel[operationName];
-          if (operation && typeof operation === "object" && operation.message) {
-            checkMessage(operation.message, [
-              "channels",
-              channelName,
-              operationName,
-              "message",
-            ]);
-          }
-        }
+  const checkChannel = (channel, basePath) => {
+    if (!isObject(channel)) return;
+    if (isObject(channel.messages)) {
+      for (const [messageName, message] of Object.entries(channel.messages)) {
+        checkMessage(message, [...basePath, "messages", messageName]);
       }
+    }
+    for (const operationName of ["publish", "subscribe"]) {
+      const operation = channel[operationName];
+      if (isObject(operation) && operation.message) {
+        checkMessage(operation.message, [...basePath, operationName, "message"]);
+      }
+    }
+    if (isObject(channel.callbacks)) {
+      for (const [callbackName, callback] of Object.entries(channel.callbacks)) {
+        checkChannel(callback, [...basePath, "callbacks", callbackName]);
+      }
+    }
+  };
+
+  if (has(document, "defaultContentType")) {
+    check(document.defaultContentType, ["defaultContentType"]);
+  }
+
+  if (isObject(document.channels)) {
+    for (const [channelName, channel] of Object.entries(document.channels)) {
+      checkChannel(channel, ["channels", channelName]);
     }
   }
 
-  const componentMessages =
-    document.components && document.components.messages;
-  if (componentMessages && typeof componentMessages === "object") {
-    for (const [messageName, message] of Object.entries(componentMessages)) {
-      checkMessage(message, ["components", "messages", messageName]);
+  const components = document.components;
+  if (isObject(components)) {
+    if (isObject(components.channels)) {
+      for (const [channelName, channel] of Object.entries(components.channels)) {
+        checkChannel(channel, ["components", "channels", channelName]);
+      }
+    }
+    if (isObject(components.messages)) {
+      for (const [messageName, message] of Object.entries(components.messages)) {
+        checkMessage(message, ["components", "messages", messageName]);
+      }
     }
   }
 

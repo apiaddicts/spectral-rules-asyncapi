@@ -2,7 +2,7 @@ module.exports = {
   asyncapi: "3.0.0",
   info: {
     version: "1.0.0",
-    title: "Content Type Avro - v3 oneOf not descended",
+    title: "Content Type Avro - v3 message-level oneOf is descended",
   },
   channels: {
     orders: {

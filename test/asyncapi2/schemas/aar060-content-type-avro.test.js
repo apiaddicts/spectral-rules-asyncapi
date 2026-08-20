@@ -9,6 +9,8 @@ const failLengthBoundary = require("./AAR060/fail-length-boundary");
 const okNullContentType = require("./AAR060/ok-null-content-type");
 const okNoDefaultContentType = require("./AAR060/ok-no-default-content-type");
 const okGuard = require("./AAR060/ok-guard");
+const failTraitsContentType = require("./AAR060/fail-traits-content-type");
+const okTraitsContentType = require("./AAR060/ok-traits-content-type");
 
 describe("AAR060: contentType must be application/*+avro (AsyncAPI 2.x)", () => {
   let linter;
@@ -73,6 +75,26 @@ describe("AAR060: contentType must be application/*+avro (AsyncAPI 2.x)", () => 
 
   test("Should skip null/scalar/empty channels and a missing components section without crashing", async () => {
     const results = await linter.run(okGuard);
+    expect(results.length).toBe(0);
+  });
+
+  test("Should flag a contentType declared only in a message trait", async () => {
+    const results = await linter.run(failTraitsContentType);
+    expect(results.length).toBe(1);
+    expectAllAAR060(results);
+  });
+
+  test("Should pass when the trait contentType is valid or the message's own contentType overrides it", async () => {
+    const results = await linter.run(okTraitsContentType);
+    expect(results.length).toBe(0);
+  });
+
+  test("Should not crash when channels and components are entirely absent", async () => {
+    const results = await linter.run({
+      asyncapi: "2.6.0",
+      info: { version: "1.0.0", title: "No channels" },
+      defaultContentType: "application/vnd.apache.avro+avro",
+    });
     expect(results.length).toBe(0);
   });
 
