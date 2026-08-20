@@ -119,6 +119,7 @@ spectral lint your-asyncapi.yaml
 | **AAR055** | `warn` | The `x-payload-references` extension, wherever it appears, must have `subject`, `ref` and `referenceName` on every item. |
 | **AAR056** | `error` | When the payload uses Avro, `schemaFormat` must be exactly `application/vnd.apache.avro;version=1.9.0`. |
 | **AAR059** | `error` | The `name` field of every Avro record (including nested records) must be in CamelCase with an uppercase first letter. |
+| **AAR060** | `error` | A message's `contentType` (and the document-level `defaultContentType`) must match `application/*+avro`. |
 
 ---
 
@@ -155,6 +156,7 @@ The ruleset includes 12 custom Spectral functions for complex validation logic:
 | `asa-error-topic-documented` | AAR057 | Validates that at least one channel is documented as an error topic |
 | `asa-retry-topic-naming-convention` | AAR058 | Validates that retry channels follow the required retry-topic naming pattern |
 | `asa-avro-record-name-camel-case` | AAR059 | Validates that every Avro record's `name` (including nested records) is in CamelCase |
+| `asa-content-type-avro` | AAR060 | Validates that every message `contentType` and the `defaultContentType` match `application/*+avro` |
 
 ---
 
@@ -175,6 +177,7 @@ apiaddicts-asyncapi-style-guide-spectral/
 │   ├── asa-message-schemas-in-components.js
 │   ├── asa-numeric-parameter-integrity.js
 │   ├── asa-string-parameter-integrity.js
+│   ├── asa-content-type-avro.js
 │   ├── asa-avro-record-name-camel-case.js
 │   ├── asa-error-topic-documented.js
 │   ├── asa-avro-schema-format.js
@@ -257,6 +260,7 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR057 | `asa:AAR057` | BUG | MAJOR |
 | AAR058 | `asa:AAR058` | BUG | MINOR |
 | AAR059 | `asa:AAR059` | BUG | MAJOR |
+| AAR060 | `asa:AAR060` | BUG | MAJOR |
 
 ---
 
