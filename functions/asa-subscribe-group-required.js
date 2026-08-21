@@ -52,26 +52,41 @@ module.exports = (document, _options, context) => {
     });
   };
 
+  const checkOperationsMap = (operations, prefix) => {
+    if (!operations || typeof operations !== "object") return;
+    for (const [operationName, operation] of Object.entries(operations)) {
+      if (!operation || typeof operation !== "object") continue;
+      if (operation.action === "receive") {
+        check(operation, [...prefix, operationName]);
+      }
+    }
+  };
+
+  const checkChannelsMap = (channels, prefix) => {
+    if (!channels || typeof channels !== "object") return;
+    for (const [channelName, channel] of Object.entries(channels)) {
+      if (!channel || typeof channel !== "object") continue;
+      check(channel.subscribe, [...prefix, channelName, "subscribe"]);
+    }
+  };
+
   const isV3 =
     typeof document.asyncapi === "string" && document.asyncapi.startsWith("3.");
 
+  const components =
+    document.components && typeof document.components === "object"
+      ? document.components
+      : undefined;
+
   if (isV3) {
-    const operations = document.operations;
-    if (operations && typeof operations === "object") {
-      for (const [operationName, operation] of Object.entries(operations)) {
-        if (!operation || typeof operation !== "object") continue;
-        if (operation.action === "receive") {
-          check(operation, ["operations", operationName]);
-        }
-      }
+    checkOperationsMap(document.operations, ["operations"]);
+    if (components) {
+      checkOperationsMap(components.operations, ["components", "operations"]);
     }
   } else {
-    const channels = document.channels;
-    if (channels && typeof channels === "object") {
-      for (const [channelName, channel] of Object.entries(channels)) {
-        if (!channel || typeof channel !== "object") continue;
-        check(channel.subscribe, ["channels", channelName, "subscribe"]);
-      }
+    checkChannelsMap(document.channels, ["channels"]);
+    if (components) {
+      checkChannelsMap(components.channels, ["components", "channels"]);
     }
   }
 

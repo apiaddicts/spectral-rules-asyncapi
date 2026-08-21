@@ -8,6 +8,9 @@ const okRefOperation = require("./AAR062/ok-ref-operation");
 const okSkipOperations = require("./AAR062/ok-skip-operations");
 const okScalarGroupId = require("./AAR062/ok-scalar-groupid");
 const okNoOperations = require("./AAR062/ok-no-operations");
+const failRefComponentsNoGroup = require("./AAR062/fail-ref-components-no-group");
+const failComponentsNoGroupUnreferenced = require("./AAR062/fail-components-no-group-unreferenced");
+const okGroupIdArray = require("./AAR062/ok-groupid-array");
 
 describe("AAR062: receive operations must declare a consumer group (AsyncAPI 3.x)", () => {
   let linter;
@@ -65,6 +68,23 @@ describe("AAR062: receive operations must declare a consumer group (AsyncAPI 3.x
 
   test("Should not fail on a document without operations", async () => {
     const results = await run(okNoOperations);
+    expect(results.length).toBe(0);
+  });
+
+  test("Should flag a receive operation defined under components and reached via $ref", async () => {
+    const results = await run(failRefComponentsNoGroup);
+    expect(results.length).toBe(1);
+    results.forEach((r) => expect(r.code).toBe("asa:AAR062"));
+  });
+
+  test("Should flag a receive operation defined under components even when unreferenced", async () => {
+    const results = await run(failComponentsNoGroupUnreferenced);
+    expect(results.length).toBe(1);
+    results.forEach((r) => expect(r.code).toBe("asa:AAR062"));
+  });
+
+  test("Should accept an array bindings.kafka.groupId as a declared group", async () => {
+    const results = await run(okGroupIdArray);
     expect(results.length).toBe(0);
   });
 });
