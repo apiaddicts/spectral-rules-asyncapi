@@ -1,0 +1,39 @@
+module.exports = {
+  asyncapi: "3.0.0",
+  info: {
+    version: "1.0.0",
+    title: "Processor Function Name Paired - OK Scenarios",
+  },
+  channels: {
+    "a-in": { address: "a.in" },
+    "b-out": { address: "b.out" },
+    "c-in": { address: "c.in" },
+    "d-out": { address: "d.out" },
+  },
+  operations: {
+    consumeA: {
+      action: "receive",
+      channel: { $ref: "#/channels/a-in" },
+      "x-scs-function-name": "processAtoB",
+    },
+    produceB: {
+      action: "send",
+      channel: { $ref: "#/channels/b-out" },
+      "x-scs-function-name": "processAtoB",
+    },
+    consumeC: {
+      action: "receive",
+      channel: { $ref: "#/channels/c-in" },
+      "x-scs-function-name": "processCtoD",
+    },
+    produceD: {
+      action: "send",
+      channel: { $ref: "#/channels/d-out" },
+      "x-scs-function-name": "processCtoD",
+    },
+    plainOperation: {
+      action: "receive",
+      channel: { $ref: "#/channels/a-in" },
+    },
+  },
+};

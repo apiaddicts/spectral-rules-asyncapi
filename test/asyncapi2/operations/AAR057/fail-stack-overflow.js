@@ -1,0 +1,7 @@
+const longTopic = "aa" + ".aa".repeat(400) + ".error.z";
+
+module.exports = {
+  asyncapi: "2.6.0",
+  info: { version: "1.0.0", title: "Error Topic Documented" },
+  channels: { [longTopic]: { subscribe: { operationId: "receivePathological" } } },
+};
