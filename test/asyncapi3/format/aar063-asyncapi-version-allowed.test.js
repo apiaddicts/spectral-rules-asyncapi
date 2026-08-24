@@ -3,6 +3,7 @@ const failExample = require("./AAR063/fail-example");
 const failNonString = require("./AAR063/fail-non-string");
 const okMissing = require("./AAR063/ok-missing");
 const okEmpty = require("./AAR063/ok-empty");
+const okSpaces = require("./AAR063/ok-spaces");
 
 describe("AAR063: asyncapi version must be one of the allowed versions (AsyncAPI 3.x)", () => {
   let linter;
@@ -32,6 +33,14 @@ describe("AAR063: asyncapi version must be one of the allowed versions (AsyncAPI
 
   test("Should not report when the asyncapi field is empty", async () => {
     const results = await linter.run(okEmpty);
+    expect(results.length).toBe(0);
+  });
+
+  test("Should pass when the version is an allowed version padded with spaces", async () => {
+    const configuredLinter = await linterForRule("asa:AAR063", {
+      functionOptions: { allowedVersions: "2.6.0,3.0.0" },
+    });
+    const results = await configuredLinter.run(okSpaces);
     expect(results.length).toBe(0);
   });
 

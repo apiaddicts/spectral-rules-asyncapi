@@ -28,8 +28,8 @@ module.exports = (document, options, context) => {
     return errors;
   }
 
-  const version = String(raw);
-  if (version.trim() === "") {
+  const version = String(raw).trim();
+  if (version === "") {
     return errors;
   }
 
