@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AAR061 - ProcessorFunctionNamePaired: Every `x-scs-function-name` must be paired one-to-one between a producing (`publish`/`send`) and a consuming (`subscribe`/`receive`) operation, so the JAPI generator links them into a single processor.
 - AAR062 - SubscribeGroupRequired: Each consuming operation (v2 `subscribe`, v3 `action: receive`) must declare a consumer group via `x-scs-group` or `bindings.kafka.groupId`, so the messaging platform can bind it to a durable, load-balanced consumer group.
 - AAR063 - AsyncAPIVersionAllowed: The root `asyncapi` version must be one of the versions allowed by the organization. The allow-list is configurable via the `allowedVersions` option (comma-separated); default `2.6.0`.
+- AAR064 - KafkaProtocolRequired: In the Kafka context, each server protocol must be `kafka` or `kafka-ssl`; other protocols such as `https` or `wss` are not permitted. Servers defined under `components.servers` are validated as well.
 
 ## [1.1.0-beta.1] - 2026-07-15
 
