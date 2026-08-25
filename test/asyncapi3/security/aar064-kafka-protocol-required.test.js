@@ -6,9 +6,10 @@ const okNoServers = require("./AAR064/ok-no-servers");
 const okNullServers = require("./AAR064/ok-null-servers");
 const okEmptyServersObject = require("./AAR064/ok-empty-servers-object");
 const okEmptyServersArray = require("./AAR064/ok-empty-servers-array");
-const okRefServer = require("./AAR064/ok-ref-server");
+const okRefServerValid = require("./AAR064/ok-ref-server-valid");
 
 const failExample = require("./AAR064/fail-example");
+const failRefServer = require("./AAR064/fail-ref-server");
 const failNonstring = require("./AAR064/fail-nonstring");
 const failEmptyAndWhitespace = require("./AAR064/fail-empty-and-whitespace");
 const failWrongCase = require("./AAR064/fail-wrong-case");
@@ -52,14 +53,18 @@ describe("AAR064: server protocol must be kafka or kafka-ssl (AsyncAPI 3.x)", ()
       expect(await run(okEmptyServersArray)).toHaveLength(0);
     });
 
-    test("does not resolve a $ref server (resolved: false)", async () => {
-      expect(await run(okRefServer)).toHaveLength(0);
+    test("accepts a valid Kafka protocol defined under components.servers", async () => {
+      expect(await run(okRefServerValid)).toHaveLength(0);
     });
   });
 
   describe("non-compliant documents", () => {
     test("reports a server using a non-Kafka protocol", async () => {
       expect(await run(failExample)).toHaveLength(1);
+    });
+
+    test("reports a non-Kafka protocol on a server defined under components.servers (referenced via $ref)", async () => {
+      expect(await run(failRefServer)).toHaveLength(1);
     });
 
     test("reports non-string scalar protocols (number / boolean)", async () => {

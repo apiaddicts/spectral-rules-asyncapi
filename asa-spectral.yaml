@@ -688,6 +688,8 @@ rules:
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar064"
     severity: error
     resolved: false
-    given: "$.servers[*]"
+    given:
+      - "$.servers[*]"
+      - "$.components.servers[*]"
     then:
       function: asa-kafka-protocol-required

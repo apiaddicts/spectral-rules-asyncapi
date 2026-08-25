@@ -70,6 +70,7 @@ spectral lint your-asyncapi.yaml
 | **AAR008** | `error` | The `servers` section must be defined in the AsyncAPI document. |
 | **AAR018** | `warn` | Security schemes must be among allowed types and must be complete (all required fields). |
 | **AAR043** | `warn` | Each channel operation should define a security scheme. |
+| **AAR064** | `error` | In the Kafka context, each server protocol must be `kafka` or `kafka-ssl` (not `https`, `wss`, etc.). |
 
 ### Operations Rules
 
@@ -83,6 +84,8 @@ spectral lint your-asyncapi.yaml
 | **AAR054** | `error` | Channel/topic classification (2nd segment) must be `cdc`, `cmd` or `sys`. |
 | **AAR057** | `error` | At least one channel must be documented as an error topic following `<topicOriginal>.[<consumerGroup>.]error.<n>`. |
 | **AAR058** | `warn` | If a channel name contains `.retry.`, it must follow `<topicOriginal>.<consumerGroup>.retry.<n>`. |
+| **AAR061** | `warn` | Producing and consuming operations must share the same `x-scs-function-name` so the JAPI generator links them as one processor. |
+| **AAR062** | `error` | Each consuming operation (v2 `subscribe`, v3 `receive`) must declare a consumer group via `x-scs-group` or `bindings.kafka.groupId`. |
 
 ### Format / Documentation Rules
 
@@ -107,6 +110,7 @@ spectral lint your-asyncapi.yaml
 | **AAR042** | `info` | Messages should have a unique `messageId` identifier. |
 | **AAR050** | `error` | The `info.title` field must exist and not be empty. |
 | **AAR051** | `error` | Every operation's `operationId` must be present and follow camelCase naming convention. |
+| **AAR063** | `error` | The root `asyncapi` version must be one of the versions allowed by the organization (configurable via `allowedVersions`; default `2.6.0`). |
 
 ### Schema Rules
 
@@ -134,7 +138,7 @@ All rules support **AsyncAPI 2.x** by default. Rules that differ structurally fo
 
 ## Custom Functions
 
-The ruleset includes 12 custom Spectral functions for complex validation logic:
+The ruleset includes 24 custom Spectral functions for complex validation logic:
 
 | Function | Used by | Purpose |
 |----------|---------|---------|
@@ -144,6 +148,7 @@ The ruleset includes 12 custom Spectral functions for complex validation logic:
 | `asa-operation-id-camel-case` | AAR051 | Checks operationId is present and follows camelCase |
 | `asa-message-examples-validation` | AAR024, AAR031 | Validates message examples against schemas |
 | `asa-numeric-parameter-integrity` | AAR032 | Checks numeric properties have constraints |
+| `asa-numeric-format` | AAR034 | Checks numeric properties declare a valid format |
 | `asa-string-parameter-integrity` | AAR033 | Checks string properties have constraints |
 | `asa-channel-servers-defined` | AAR040 | Validates channel server references exist |
 | `asa-binding-version` | AAR037 | Checks bindings have bindingVersion |
@@ -157,6 +162,10 @@ The ruleset includes 12 custom Spectral functions for complex validation logic:
 | `asa-retry-topic-naming-convention` | AAR058 | Validates that retry channels follow the required retry-topic naming pattern |
 | `asa-avro-record-name-camel-case` | AAR059 | Validates that every Avro record's `name` (including nested records) is in CamelCase |
 | `asa-content-type-avro` | AAR060 | Validates that every message `contentType` and the `defaultContentType` match `application/*+avro` |
+| `asa-processor-function-name-paired` | AAR061 | Validates that producing and consuming operations share the same `x-scs-function-name` |
+| `asa-subscribe-group-required` | AAR062 | Validates that each consuming operation declares a consumer group |
+| `asa-asyncapi-version-allowed` | AAR063 | Validates that the root `asyncapi` version is one of the allowed versions |
+| `asa-kafka-protocol-required` | AAR064 | Validates that each server protocol is `kafka` or `kafka-ssl` |
 
 ---
 
@@ -261,6 +270,10 @@ This Spectral ruleset is a direct translation of the [sonarasyncapi-rules](https
 | AAR058 | `asa:AAR058` | BUG | MINOR |
 | AAR059 | `asa:AAR059` | BUG | MAJOR |
 | AAR060 | `asa:AAR060` | BUG | MAJOR |
+| AAR061 | `asa:AAR061` | BUG | MINOR |
+| AAR062 | `asa:AAR062` | BUG | MAJOR |
+| AAR063 | `asa:AAR063` | BUG | MAJOR |
+| AAR064 | `asa:AAR064` | VULNERABILITY | CRITICAL |
 
 ---
 
