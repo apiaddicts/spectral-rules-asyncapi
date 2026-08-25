@@ -1,0 +1,9 @@
+module.exports = {
+  info: {
+    version: "1.0.0",
+    title: "AsyncAPI Version Allowed - Missing Version",
+  },
+  channels: {
+    "/pets": {},
+  },
+};
