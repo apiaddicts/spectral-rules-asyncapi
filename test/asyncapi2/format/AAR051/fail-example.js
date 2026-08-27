@@ -116,6 +116,78 @@ module.exports = {
           }
         }
       }
+    },
+    "order/refunded": {
+      "description": "Publish with an explicitly null operationId.",
+      "publish": {
+        "operationId": null,
+        "summary": "Publish order refunded events.",
+        "description": "Publish with operationId explicitly set to null.",
+        "message": {
+          "title": "OrderRefunded",
+          "payload": { "type": "object" }
+        }
+      }
+    },
+    "shipment/created": {
+      "description": "Channel exercising a leading digit and kebab-case.",
+      "publish": {
+        "operationId": "2procesarEnvio",
+        "summary": "operationId starting with a digit.",
+        "message": { "payload": { "type": "object" } }
+      },
+      "subscribe": {
+        "operationId": "procesar-envio",
+        "summary": "operationId in kebab-case.",
+        "message": { "payload": { "type": "object" } }
+      }
+    },
+    "shipment/returned": {
+      "description": "Channel exercising upper case and inner spaces.",
+      "publish": {
+        "operationId": "PROCESAR_DEVOLUCION",
+        "summary": "operationId in SCREAMING_SNAKE_CASE.",
+        "message": { "payload": { "type": "object" } }
+      },
+      "subscribe": {
+        "operationId": "procesar devolucion",
+        "summary": "operationId with inner spaces.",
+        "message": { "payload": { "type": "object" } }
+      }
+    },
+    "invoice/issued": {
+      "description": "Channel exercising a trailing space and non ASCII characters.",
+      "publish": {
+        "operationId": "procesarFactura ",
+        "summary": "operationId with a trailing space.",
+        "message": { "payload": { "type": "object" } }
+      },
+      "subscribe": {
+        "operationId": "procesarFacturaÑ",
+        "summary": "operationId with accented characters.",
+        "message": { "payload": { "type": "object" } }
+      }
+    },
+    "audit/logged": {
+      "description": "Channel exercising non-scalar and boolean operationId values.",
+      "publish": {
+        "operationId": true,
+        "summary": "Boolean operationId.",
+        "message": { "payload": { "type": "object" } }
+      },
+      "subscribe": {
+        "operationId": { "name": "auditar" },
+        "summary": "Object operationId.",
+        "message": { "payload": { "type": "object" } }
+      }
+    },
+    "alert/raised": {
+      "description": "Channel exercising an array operationId.",
+      "publish": {
+        "operationId": ["enviarAlerta"],
+        "summary": "Array operationId.",
+        "message": { "payload": { "type": "object" } }
+      }
     }
   },
   "components": {

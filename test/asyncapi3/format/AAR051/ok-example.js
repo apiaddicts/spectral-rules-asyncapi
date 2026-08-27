@@ -3,7 +3,7 @@ module.exports = {
   "info": {
     "title": "Swagger Petstore",
     "version": "1.0.0",
-    "description": "Petstore API (AsyncAPI 3.x) where all operations declare a camelCase operationId."
+    "description": "Petstore API (AsyncAPI 3.x) where every operation key follows camelCase."
   },
   "channels": {
     "petEvents": {
@@ -35,22 +35,41 @@ module.exports = {
   },
   "operations": {
     "receivePetCreated": {
-      "description": "Receive with a camelCase operationId.",
+      "description": "camelCase operation key.",
       "action": "receive",
-      "channel": { "$ref": "#/channels/petEvents" },
-      "operationId": "solicitarBeca"
+      "channel": { "$ref": "#/channels/petEvents" }
     },
     "sendPetUpdated": {
-      "description": "Send with a camelCase operationId.",
+      "description": "camelCase operation key.",
       "action": "send",
-      "channel": { "$ref": "#/channels/petEvents" },
-      "operationId": "recuperarBeca"
+      "channel": { "$ref": "#/channels/petEvents" }
     },
-    "sendOrderPlaced": {
-      "description": "Send with a camelCase operationId containing digits.",
+    "processTopic2Topic3": {
+      "description": "camelCase operation key containing digits.",
       "action": "send",
-      "channel": { "$ref": "#/channels/orderEvents" },
-      "operationId": "processTopic2Topic3"
+      "channel": { "$ref": "#/channels/orderEvents" }
+    },
+    "a": {
+      "description": "Single lowercase letter operation key.",
+      "action": "send",
+      "channel": { "$ref": "#/channels/orderEvents" }
+    },
+    "processCustomerInvoiceWithDiscountApplied": {
+      "description": "Long camelCase operation key.",
+      "action": "send",
+      "channel": { "$ref": "#/channels/orderEvents" }
+    },
+    "reuseSharedOperation": {
+      "$ref": "#/components/operations/sharedOperation"
+    }
+  },
+  "components": {
+    "operations": {
+      "sharedOperation": {
+        "description": "Reusable operation with a camelCase key.",
+        "action": "receive",
+        "channel": { "$ref": "#/channels/orderEvents" }
+      }
     }
   }
 };
