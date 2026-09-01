@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">6.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/15</span>
+                <span class='fraction'>1/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.25% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>13/16</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">6.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/15</span>
+                <span class='fraction'>1/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -106,36 +106,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">34x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * @param {object} given - The property schema object
@@ -143,36 +143,36 @@
  * @param {import('@stoplight/spectral-core').RulesetFunctionContext} context
  * @returns {Array} Array of error objects
  */
-module.exports = (given, _options, context) =&gt; {
-  const errors = [];
+module.exports = <span class="fstat-no" title="function not covered" >(g</span>iven, _options, context) =&gt; {
+  const errors = <span class="cstat-no" title="statement not covered" >[];</span>
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (!given || typeof given !== "object") {
+<span class="cstat-no" title="statement not covered" >  if (!given || typeof given !== "object") {</span>
 <span class="cstat-no" title="statement not covered" >    return errors;</span>
   }
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (given.type !== "integer" &amp;&amp; given.type !== "number") {
+<span class="cstat-no" title="statement not covered" >  if (given.type !== "integer" &amp;&amp; given.type !== "number") {</span>
 <span class="cstat-no" title="statement not covered" >    return errors;</span>
   }
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (given.$ref) {
+<span class="cstat-no" title="statement not covered" >  if (given.$ref) {</span>
 <span class="cstat-no" title="statement not covered" >    return errors;</span>
   }
 &nbsp;
-  const format = given.format;
-  if (format === undefined || format === null) {
-    return errors;
+  const format = <span class="cstat-no" title="statement not covered" >given.format;</span>
+<span class="cstat-no" title="statement not covered" >  if (format === undefined || format === null) {</span>
+<span class="cstat-no" title="statement not covered" >    return errors;</span>
   }
 &nbsp;
-  const validFormats = ["int32", "int64", "float", "double"];
-  if (!validFormats.includes(format)) {
-    errors.push({
+  const validFormats = <span class="cstat-no" title="statement not covered" >["int32", "int64", "float", "double"];</span>
+<span class="cstat-no" title="statement not covered" >  if (!validFormats.includes(format)) {</span>
+<span class="cstat-no" title="statement not covered" >    errors.push({</span>
       message:
         "Numeric property must specify a valid 'format' (int32, int64, float, double).",
       path: context.path,
     });
   }
 &nbsp;
-  return errors;
+<span class="cstat-no" title="statement not covered" >  return errors;</span>
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -181,7 +181,7 @@ module.exports = (given, _options, context) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-08-18T16:10:42.963Z
+                at 2026-08-24T18:02:51.397Z
             </div>
         <script src="prettify.js"></script>
         <script>

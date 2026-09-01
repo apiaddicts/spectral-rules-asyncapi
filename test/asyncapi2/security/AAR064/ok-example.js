@@ -1,0 +1,13 @@
+module.exports = {
+  asyncapi: "2.4.0",
+  info: { version: "1.0.0", title: "Kafka Protocol Required - OK Scenario" },
+  servers: {
+    local: { url: "broker.local:9092", protocol: "kafka", description: "Local Kafka broker" },
+    production: {
+      url: "broker.example.com:9092",
+      protocol: "kafka-ssl",
+      description: "Production Kafka broker with SASL_SSL",
+    },
+  },
+  channels: { "user-events": {} },
+};
