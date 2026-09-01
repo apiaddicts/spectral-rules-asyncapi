@@ -338,11 +338,6 @@ rules:
                   $data: "1/summary"
           errorMessage: "Description and summary must be different"
 
-  # ---------------------------------------------------------------------------
-  # AAR024 - MessageValidation
-  # Each message must declare a contentType unless it is an Avro message.
-  # Severity: error (MAJOR / BUG)
-  # ---------------------------------------------------------------------------
   asa:AAR024:
     description: "Each message must declare a contentType unless it is an Avro message (auto-detected via schemaFormat)."
     message: "AAR024: {{error}}"

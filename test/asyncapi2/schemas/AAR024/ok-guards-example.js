@@ -28,6 +28,19 @@ module.exports = {
         },
       },
     },
+    referenceSite: { $ref: "#/components/channels/orders" },
+    emptyOneOf: { subscribe: { message: { oneOf: [] } } },
+    oneOfNotAnArray: {
+      subscribe: {
+        message: {
+          contentType: "application/json",
+          oneOf: { first: { payload: { type: "object" } } },
+        },
+      },
+    },
   },
-  components: {},
+  components: {
+    channels: null,
+    messages: null,
+  },
 };

@@ -35,6 +35,24 @@ module.exports = {
     channelWithoutMessages: {
       address: "channelWithoutMessages",
     },
+    scalarMessages: {
+      address: "scalarMessages",
+      messages: "not-an-object",
+    },
+    referenceSite: { $ref: "#/components/channels/orders" },
+    emptyOneOf: {
+      address: "emptyOneOf",
+      messages: { M5: { oneOf: [] } },
+    },
+    oneOfNotAnArray: {
+      address: "oneOfNotAnArray",
+      messages: {
+        M6: {
+          contentType: "application/json",
+          oneOf: { first: { payload: { type: "object" } } },
+        },
+      },
+    },
   },
-  components: {},
+  components: "not-an-object",
 };

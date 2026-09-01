@@ -7,6 +7,10 @@ const failOneofExample = require("./AAR024/fail-oneof-example");
 const okGuardsExample = require("./AAR024/ok-guards-example");
 const failVariantsExample = require("./AAR024/fail-variants-example");
 const failComponentsOneofExample = require("./AAR024/fail-components-oneof-example");
+const okComponentsOneofExample = require("./AAR024/ok-components-oneof-example");
+const okTraitsExample = require("./AAR024/ok-traits-example");
+const failTraitsExample = require("./AAR024/fail-traits-example");
+const failComponentsChannelExample = require("./AAR024/fail-components-channel-example");
 
 describe("AAR024: each message must declare a contentType unless Avro (AsyncAPI 2.x)", () => {
   let linter;
@@ -54,10 +58,44 @@ describe("AAR024: each message must declare a contentType unless Avro (AsyncAPI 
     results.forEach((r) => expect(r.code).toBe("asa:AAR024"));
   });
 
-  test("flags a components.messages entry itself when it omits contentType (oneOf not descended)", async () => {
+  test("descends a components.messages oneOf and flags only the member that omits contentType", async () => {
     const results = only(await linter.run(failComponentsOneofExample));
     expect(results.length).toBe(1);
-    expect(results[0].path).toEqual(["components", "messages", "OrderMsg"]);
+    expect(results[0].path).toEqual([
+      "components",
+      "messages",
+      "OrderMsg",
+      "oneOf",
+      "1",
+    ]);
+  });
+
+  test("passes when every member of a components.messages oneOf declares a contentType", async () => {
+    const results = only(await linter.run(okComponentsOneofExample));
+    expect(results.length).toBe(0);
+  });
+
+  test("accepts a contentType inherited from message traits", async () => {
+    const results = only(await linter.run(okTraitsExample));
+    expect(results.length).toBe(0);
+  });
+
+  test("flags messages whose traits never leave a contentType declared", async () => {
+    const results = only(await linter.run(failTraitsExample));
+    expect(results.length).toBe(9);
+    results.forEach((r) => expect(r.code).toBe("asa:AAR024"));
+  });
+
+  test("flags a message defined under components.channels", async () => {
+    const results = only(await linter.run(failComponentsChannelExample));
+    expect(results.length).toBe(1);
+    expect(results[0].path).toEqual([
+      "components",
+      "channels",
+      "orders",
+      "subscribe",
+      "message",
+    ]);
   });
 
   test("returns no results for a non-object document", async () => {
