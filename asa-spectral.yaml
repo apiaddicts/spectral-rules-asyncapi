@@ -19,6 +19,7 @@ functions:
   - asa-description-format
   - asa-duplicate-operation-id
   - asa-operation-id-camel-case
+  - asa-message-content-type
   - asa-message-examples-validation
   - asa-numeric-parameter-integrity
   - asa-string-parameter-integrity
@@ -342,19 +343,15 @@ rules:
                   $data: "1/summary"
           errorMessage: "Description and summary must be different"
 
-  # ---------------------------------------------------------------------------
-  # AAR024 - MessageValidation
-  # All messages must comply with the message schema.
-  # Severity: warn (MAJOR / BUG)
-  # ---------------------------------------------------------------------------
   asa:AAR024:
-    description: "All messages sent and received must comply with the message schema specified in the documentation."
+    description: "Each message must declare a contentType unless it is an Avro message (auto-detected via schemaFormat)."
     message: "AAR024: {{error}}"
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar024"
-    severity: warn
-    given: "$.channels[*][publish,subscribe].message"
+    severity: error
+    resolved: false
+    given: "$"
     then:
-      function: asa-message-examples-validation
+      function: asa-message-content-type
 
   # ---------------------------------------------------------------------------
   # AAR026 - MessageSchemas
