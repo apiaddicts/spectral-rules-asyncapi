@@ -8,14 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-## [1.1.0-beta-3] - 2026-09-01
+## [1.1.0-beta.3] - 2026-09-01
 
 ### Fixed
 - AAR051 - OperationIdCamelCase: in AsyncAPI 3.x the operation identifier is its key in the `operations` map, not the `operationId` field that 3.x removed, so that key is now what must follow camelCase.
 - AAR024 - MessageValidation: It now validates that every message declares a `contentType` unless it is an Avro message, across AsyncAPI 2.x and 3.x. Backed by the new `asa-message-content-type` function.
 
 
-## [1.1.0-beta-2] - 2026-08-19
+## [1.1.0-beta.2] - 2026-08-19
 
 ### Added
 
