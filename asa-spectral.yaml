@@ -546,13 +546,12 @@ rules:
       function: truthy
 
   asa:AAR051:
-    description: "Every operation's operationId must be present and follow camelCase naming convention."
+    description: "Every operation must be identified by a camelCase name: the 'operationId' field in AsyncAPI 2.x, the key of the operation in the 'operations' map in AsyncAPI 3.x."
     message: "AAR051: {{error}}"
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar051"
     severity: error
-    given:
-      - "$.channels[*][publish,subscribe]"
-      - "$.operations[*]"
+    resolved: false
+    given: "$"
     then:
       function: asa-operation-id-camel-case
 

@@ -79,9 +79,38 @@ module.exports = {
           }
         }
       }
+    },
+    "invoice/issued": {
+      "description": "Channel exercising the boundaries of the camelCase pattern.",
+      "publish": {
+        "operationId": "a",
+        "summary": "Single lowercase letter operationId.",
+        "message": { "payload": { "type": "object" } }
+      },
+      "subscribe": {
+        "operationId": "procesarFacturaDeClienteConDescuentoAplicadoYRevisado",
+        "summary": "Long camelCase operationId.",
+        "message": { "payload": { "type": "object" } }
+      }
+    },
+    "x-internal-routing": {
+      "description": "Extension key, not a channel, must not be evaluated.",
+      "publish": {
+        "summary": "Operation without operationId inside an extension."
+      }
     }
   },
   "components": {
+    "channels": {
+      "reservation/created": {
+        "description": "Reusable channel defined under components.",
+        "subscribe": {
+          "operationId": "obtenerReserva",
+          "summary": "Receive reservation created events.",
+          "message": { "payload": { "type": "object" } }
+        }
+      }
+    },
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",

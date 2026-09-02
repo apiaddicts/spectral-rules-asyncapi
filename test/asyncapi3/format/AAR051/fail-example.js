@@ -3,7 +3,7 @@ module.exports = {
   "info": {
     "title": "Swagger Petstore",
     "version": "1.0.0",
-    "description": "Petstore API (AsyncAPI 3.x) where operationId is missing or not in camelCase."
+    "description": "Petstore API (AsyncAPI 3.x) where operation keys do not follow camelCase."
   },
   "channels": {
     "petEvents": {
@@ -34,34 +34,70 @@ module.exports = {
     }
   },
   "operations": {
-    "receivePetCreated": {
-      "description": "Receive without operationId field.",
+    "SendPetCreated": {
+      "description": "PascalCase operation key.",
+      "action": "send",
+      "channel": { "$ref": "#/channels/petEvents" }
+    },
+    "send_pet_updated": {
+      "description": "snake_case operation key.",
+      "action": "send",
+      "channel": { "$ref": "#/channels/petEvents" }
+    },
+    "send-pet-deleted": {
+      "description": "kebab-case operation key.",
+      "action": "send",
+      "channel": { "$ref": "#/channels/petEvents" }
+    },
+    "2sendOrderPlaced": {
+      "description": "Operation key starting with a digit.",
+      "action": "send",
+      "channel": { "$ref": "#/channels/orderEvents" }
+    },
+    "SEND_ORDER_CANCELLED": {
+      "description": "SCREAMING_SNAKE_CASE operation key.",
+      "action": "send",
+      "channel": { "$ref": "#/channels/orderEvents" }
+    },
+    "send order shipped": {
+      "description": "Operation key with spaces.",
+      "action": "send",
+      "channel": { "$ref": "#/channels/orderEvents" }
+    },
+    "": {
+      "description": "Empty operation key: no usable identifier at all.",
+      "action": "send",
+      "channel": { "$ref": "#/channels/orderEvents" }
+    },
+    "receivePetEvents": {
+      "description": "Valid camelCase key, must not be reported.",
       "action": "receive",
       "channel": { "$ref": "#/channels/petEvents" }
     },
-    "sendPetUpdated": {
-      "description": "Send with a snake_case operationId.",
+    "goodKeyWithBadOperationId": {
+      "description": "Stray operationId field: AsyncAPI 3.x only evaluates the key.",
       "action": "send",
       "channel": { "$ref": "#/channels/petEvents" },
-      "operationId": "on_pet_updated"
+      "operationId": "bad_operation_id"
     },
-    "receivePetDeleted": {
-      "description": "Receive with a PascalCase operationId.",
-      "action": "receive",
-      "channel": { "$ref": "#/channels/petEvents" },
-      "operationId": "OnPetDeleted"
-    },
-    "sendOrderPlaced": {
-      "description": "Send with an empty string operationId.",
+    "x-internal-operation": {
+      "description": "Extension key, not an operation, must not be reported.",
       "action": "send",
-      "channel": { "$ref": "#/channels/orderEvents" },
-      "operationId": ""
-    },
-    "sendOrderCancelled": {
-      "description": "Send with a non-string (numeric) operationId.",
-      "action": "send",
-      "channel": { "$ref": "#/channels/orderEvents" },
-      "operationId": 12345
+      "channel": { "$ref": "#/channels/petEvents" }
+    }
+  },
+  "components": {
+    "operations": {
+      "SharedOperation": {
+        "description": "Reusable operation with a PascalCase key.",
+        "action": "receive",
+        "channel": { "$ref": "#/channels/orderEvents" }
+      },
+      "sharedOperation": {
+        "description": "Reusable operation with a valid camelCase key.",
+        "action": "receive",
+        "channel": { "$ref": "#/channels/orderEvents" }
+      }
     }
   }
 };
