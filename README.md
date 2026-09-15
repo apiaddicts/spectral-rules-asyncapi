@@ -110,7 +110,7 @@ spectral lint your-asyncapi.yaml
 | **AAR042** | `info` | Messages should have a unique `messageId` identifier. |
 | **AAR050** | `error` | The `info.title` field must exist and not be empty. |
 | **AAR051** | `error` | Every operation's `operationId` must be present and follow camelCase naming convention. |
-| **AAR063** | `error` | The root `asyncapi` version must be one of the versions allowed by the organization (configurable via `allowedVersions`; default `2.6.0`). |
+| **AAR063** | `error` | The root `asyncapi` version must be one of the versions allowed by the organization (configurable via `allowedVersions`; default `2.6.0,3.0.0,3.1.0`). |
 
 ### Schema Rules
 

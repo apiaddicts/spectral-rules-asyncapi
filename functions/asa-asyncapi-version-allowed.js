@@ -6,7 +6,7 @@
  * @returns {Array} Array of error objects
  */
 
-const DEFAULT_ALLOWED_VERSIONS = "2.6.0";
+const DEFAULT_ALLOWED_VERSIONS = "2.6.0,3.0.0,3.1.0";
 
 module.exports = (document, options, context) => {
   const errors = [];

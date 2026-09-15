@@ -667,7 +667,7 @@ rules:
       function: asa-subscribe-group-required
 
   asa:AAR063:
-    description: "The root asyncapi version must be one of the versions allowed by the organization. The allow-list is configurable via the allowedVersions option (comma-separated); default: 2.6.0."
+    description: "The root asyncapi version must be one of the versions allowed by the organization. The allow-list is configurable via the allowedVersions option (comma-separated); default: 2.6.0,3.0.0,3.1.0."
     message: "AAR063: {{error}}"
     documentationUrl: "https://github.com/apiaddicts/apiaddicts-asyncapi-style-guide-spectral#aar063"
     severity: error
@@ -676,7 +676,7 @@ rules:
     then:
       function: asa-asyncapi-version-allowed
       functionOptions:
-        allowedVersions: "2.6.0"
+        allowedVersions: "2.6.0,3.0.0,3.1.0"
 
   asa:AAR064:
     description: "In the Kafka context, each server protocol must be 'kafka' or 'kafka-ssl'. Other protocols such as https or wss are not permitted."
