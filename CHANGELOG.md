@@ -7,6 +7,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.1.0-beta.5] - 2026-09-18
+
+### Fixed
+- AAR052 - AvroNamespacePattern: Avro schemas inside a `oneOf` are now validated in AsyncAPI 2.x, where `message.oneOf` is a Messages Object. They stay out of scope in AsyncAPI 3.x, whose Message Object has no `oneOf`. This restores parity with the SonarQube engine in both versions.
+
+### Changed
+- AAR063 - AsyncAPIVersionAllowed: The default `allowedVersions` value is now `2.6.0,3.0.0,3.1.0`. Organizations that need a narrower allow-list must configure it explicitly.
+- AAR060 - ContentTypeAvro: The rule description now states how an absent `contentType` is split between AAR024 and this rule.
+
 ## [1.1.0-beta.4] - 2026-09-02
 
 ### Fixed
