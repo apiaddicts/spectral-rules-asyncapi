@@ -4,6 +4,8 @@ const okExample = require("./AAR052/ok-example");
 const edgeExample = require("./AAR052/edge-example");
 const mixedExample = require("./AAR052/mixed-example");
 const locationsExample = require("./AAR052/locations-example");
+const oneOfExample = require("./AAR052/oneof-example");
+const wrapperMessageLevelExample = require("./AAR052/wrapper-message-level-example");
 
 describe("AAR052: Avro namespace must follow the corporate pattern", () => {
   let linter;
@@ -91,6 +93,22 @@ describe("AAR052: Avro namespace must follow the corporate pattern", () => {
       "channels.orders.subscribe.message.payload",
       "components.schemas.CompSchema",
     ]);
+    results.forEach((r) => expect(r.code).toBe("asa:AAR052"));
+  });
+
+  test("Should flag the invalid namespace inside a v2 message.oneOf member, matching Sonar's grammar reach", async () => {
+    const results = await linter.run(oneOfExample);
+    const paths = results.map((r) => r.path.join(".")).sort();
+
+    expect(paths).toEqual(["channels.orders.subscribe.message.oneOf.0.payload"]);
+    results.forEach((r) => expect(r.code).toBe("asa:AAR052"));
+  });
+
+  test("Should flag a wrapper payload.schema when schemaFormat sits at message level instead of inside the payload", async () => {
+    const results = await linter.run(wrapperMessageLevelExample);
+    const paths = results.map((r) => r.path.join(".")).sort();
+
+    expect(paths).toEqual(["channels.ordersBad.subscribe.message.payload.schema"]);
     results.forEach((r) => expect(r.code).toBe("asa:AAR052"));
   });
 });

@@ -12,18 +12,18 @@ describe("AAR063: asyncapi version must be one of the allowed versions (AsyncAPI
     linter = await linterForRule("asa:AAR063");
   });
 
-  test("Should report a violation for 3.0.0 under the default 2.6.0 allow-list", async () => {
+  test("Should pass for 3.0.0 under the default allow-list, which covers AsyncAPI 3", async () => {
     const results = await linter.run(failExample);
-    expect(results.length).toBe(1);
-    results.forEach((r) => expect(r.code).toBe("asa:AAR063"));
+    expect(results.length).toBe(0);
   });
 
-  test("Should pass for the same 3.0.0 document once allowedVersions includes 3.0.0", async () => {
+  test("Should report for the same 3.0.0 document once allowedVersions is narrowed to 2.6.0", async () => {
     const configuredLinter = await linterForRule("asa:AAR063", {
-      functionOptions: { allowedVersions: "2.6.0,3.0.0" },
+      functionOptions: { allowedVersions: "2.6.0" },
     });
     const results = await configuredLinter.run(failExample);
-    expect(results.length).toBe(0);
+    expect(results.length).toBe(1);
+    results.forEach((r) => expect(r.code).toBe("asa:AAR063"));
   });
 
   test("Should not report when the asyncapi field is missing", async () => {
@@ -37,10 +37,7 @@ describe("AAR063: asyncapi version must be one of the allowed versions (AsyncAPI
   });
 
   test("Should pass when the version is an allowed version padded with spaces", async () => {
-    const configuredLinter = await linterForRule("asa:AAR063", {
-      functionOptions: { allowedVersions: "2.6.0,3.0.0" },
-    });
-    const results = await configuredLinter.run(okSpaces);
+    const results = await linter.run(okSpaces);
     expect(results.length).toBe(0);
   });
 
@@ -51,7 +48,10 @@ describe("AAR063: asyncapi version must be one of the allowed versions (AsyncAPI
   });
 
   test("Should report with the expected message and path", async () => {
-    const results = await linter.run(failExample);
+    const configuredLinter = await linterForRule("asa:AAR063", {
+      functionOptions: { allowedVersions: "2.6.0" },
+    });
+    const results = await configuredLinter.run(failExample);
     expect(results.length).toBe(1);
     expect(results[0].message).toBe(
       "AAR063: The asyncapi version must be one of the versions allowed by the organization"
@@ -64,6 +64,11 @@ describe("AAR063: asyncapi version must be one of the allowed versions (AsyncAPI
       functionOptions: { allowedVersions: "2.6.0, ,3.0.0" },
     });
     const results = await configuredLinter.run(failExample);
+    expect(results.length).toBe(0);
+  });
+
+  test("Should pass for 3.1.0 under the default allow-list", async () => {
+    const results = await linter.run({ ...failExample, asyncapi: "3.1.0" });
     expect(results.length).toBe(0);
   });
 });

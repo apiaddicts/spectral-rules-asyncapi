@@ -6,6 +6,7 @@
  */
 
 const AVRO_CONTENT_TYPE = /^application\/.{1,255}\+avro$/;
+const AVRO_SCHEMA_FORMAT_PREFIX = "application/vnd.apache.avro";
 
 module.exports = (document, _options, context) => {
   const errors = [];
@@ -42,6 +43,14 @@ module.exports = (document, _options, context) => {
     return null;
   };
 
+  const hasAvroSchemaFormat = (node) =>
+    isObject(node) &&
+    typeof node.schemaFormat === "string" &&
+    node.schemaFormat.includes(AVRO_SCHEMA_FORMAT_PREFIX);
+
+  const isAvroMessage = (message) =>
+    hasAvroSchemaFormat(message) || hasAvroSchemaFormat(message.payload);
+
   const checkMessage = (message, basePath) => {
     if (!isObject(message) || message.$ref) {
       return;
@@ -53,9 +62,16 @@ module.exports = (document, _options, context) => {
       return;
     }
     const effective = effectiveContentType(message);
-    if (effective) {
-      check(effective.value, [...basePath, ...effective.path]);
+    if (effective === null || effective.value === null || effective.value === undefined) {
+      if (isAvroMessage(message) && !has(document, "defaultContentType")) {
+        errors.push({
+          message: "An Avro message must declare a contentType matching 'application/*+avro'.",
+          path: [...context.path, ...basePath],
+        });
+      }
+      return;
     }
+    check(effective.value, [...basePath, ...effective.path]);
   };
 
   const checkChannel = (channel, basePath) => {

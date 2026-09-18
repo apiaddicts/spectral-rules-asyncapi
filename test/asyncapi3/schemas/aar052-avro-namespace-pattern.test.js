@@ -4,6 +4,7 @@ const okExample = require("./AAR052/ok-example");
 const edgeExample = require("./AAR052/edge-example");
 const mixedExample = require("./AAR052/mixed-example");
 const locationsExample = require("./AAR052/locations-example");
+const oneOfExample = require("./AAR052/oneof-example");
 
 describe("AAR052 (AsyncAPI 3.x): Avro namespace must follow the corporate pattern", () => {
   let linter;
@@ -90,5 +91,10 @@ describe("AAR052 (AsyncAPI 3.x): Avro namespace must follow the corporate patter
       "components.schemas.CompSchema",
     ]);
     results.forEach((r) => expect(r.code).toBe("asa:AAR052"));
+  });
+
+  test("Should NOT flag Avro records under a v3 message oneOf: AsyncAPI 3 has no oneOf on the Message Object, so Sonar's grammar never reaches them", async () => {
+    const results = await linter.run(oneOfExample);
+    expect(results.length).toBe(0);
   });
 });

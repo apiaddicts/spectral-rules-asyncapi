@@ -23,6 +23,12 @@ function isUnderOneOf(path) {
   return path.includes("oneOf");
 }
 
+const isVersion3Plus = (raw) => {
+  if (raw === null || raw === undefined || typeof raw === "object") return false;
+  const version = String(raw);
+  return version.startsWith("3.0") || version.startsWith("3.1") || version.startsWith("3.2");
+};
+
 module.exports = (schema, options, context) => {
   if (!schema || typeof schema !== "object") {
     return [];
@@ -35,7 +41,9 @@ module.exports = (schema, options, context) => {
   if (isInsideAvroFields(path)) {
     return [];
   }
-  if (isUnderOneOf(path)) {
+
+  const document = context.document && context.document.data;
+  if (isVersion3Plus(document && document.asyncapi) && isUnderOneOf(path)) {
     return [];
   }
 

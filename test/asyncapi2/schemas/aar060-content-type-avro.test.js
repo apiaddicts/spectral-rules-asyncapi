@@ -9,6 +9,8 @@ const failLengthBoundary = require("./AAR060/fail-length-boundary");
 const okNullContentType = require("./AAR060/ok-null-content-type");
 const okNoDefaultContentType = require("./AAR060/ok-no-default-content-type");
 const okGuard = require("./AAR060/ok-guard");
+const failMissingOnAvroMessage = require("./AAR060/fail-missing-on-avro-message");
+const okMissingWithDefault = require("./AAR060/ok-missing-with-default");
 const failTraitsContentType = require("./AAR060/fail-traits-content-type");
 const okTraitsContentType = require("./AAR060/ok-traits-content-type");
 
@@ -101,5 +103,17 @@ describe("AAR060: contentType must be application/*+avro (AsyncAPI 2.x)", () => 
   test("Should return no issues (and not crash) when the root document is not an object", async () => {
     expect((await linter.run("42")).length).toBe(0);
     expect((await linter.run("- one\n- two")).length).toBe(0);
+  });
+  test("Should flag an Avro message that declares no contentType at all (AAR024 exempts Avro messages, so this rule must cover them)", async () => {
+    const results = await linter.run(failMissingOnAvroMessage);
+    const paths = results.map((r) => r.path.join(".")).sort();
+
+    expect(paths).toEqual(["channels.orders.subscribe.message"]);
+    results.forEach((r) => expect(r.code).toBe("asa:AAR060"));
+  });
+
+  test("Should not flag an Avro message without contentType when the document declares a defaultContentType covering it", async () => {
+    const results = await linter.run(okMissingWithDefault);
+    expect(results.length).toBe(0);
   });
 });
