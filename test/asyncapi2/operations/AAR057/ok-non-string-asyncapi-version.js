@@ -1,0 +1,5 @@
+module.exports = {
+  asyncapi: 2,
+  info: { version: "1.0.0", title: "Error Topic Documented" },
+  channels: { "orders.error.1": { subscribe: { operationId: "receiveOrdersError" } } },
+};
